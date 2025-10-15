@@ -1,0 +1,120 @@
+[
+  {
+    "id": "sess_2w2siFQZDLkjqJubSFLPD57ILFf",
+    "pathRoot": "/client/sessions",
+    "status": "active",
+    "lastActiveAt": "2025-04-22T18:47:51.229Z",
+    "lastActiveToken": {
+      "pathRoot": "tokens",
+      "jwt": {
+        "encoded": {
+          "header": "eyJhbGciOiJSUzI1NiIsImNhdCI6ImNsX0I3ZDRQRDExMUFBQSIsImtpZCI6Imluc18ydTA4WnJZRG95MXliWDZCcWh5ZGFJeXhXZnciLCJ0eXAiOiJKV1QifQ",
+          "payload": "eyJhenAiOiJodHRwOi8vbG9jYWxob3N0OjMwMDAiLCJleHAiOjE3NDUzNDc3MzgsImZ2YSI6WzE2MDksLTFdLCJpYXQiOjE3NDUzNDc2NzgsImlzcyI6Imh0dHBzOi8vY2hhcm1lZC1yb29zdGVyLTMuY2xlcmsuYWNjb3VudHMuZGV2IiwibmJmIjoxNzQ1MzQ3NjY4LCJzaWQiOiJzZXNzXzJ3MnNpRlFaRExranFKdWJTRkxQRDU3SUxGZiIsInN1YiI6InVzZXJfMncyc2lESzNmRXJjVVlOc2dJTG5KeE5BNGIxIn0",
+          "signature": "Zn3eoldvu223aF5dhBnBjeuCJ9yMhGXmJtDyGykKtwwcXOWnIYphdNF3swpEAtfZLJlxcRQubUhN_HvGKxisGbZ2no4K583KSULfeVI_gISZBFSJAk24hokDrNWzxWeV8D_TOhDq7mQlV1uJMsYW76E3YI3w5iocOUsAXqUTSgCTTToAlyHcWL5NvaJauBufbX3Milc7SapEM9W6o81uPxuX4jZ1Fru4A_DylWrEwIuBQcjSrS-pNFFIHnOHG9SrY-Awgj2scTGP5LNgq9jTdNENIpTcfdhI5Mre7fPg-NERGQs8bx4uYpk82z5puohY8001dXicBtad4yriP1mKhw"
+        },
+        "header": { "alg": "RS256", "cat": "cl_B7d4PD111AAA", "kid": "ins_2u08ZrYDoy1ybX6BqhydaIyxWfw", "typ": "JWT" },
+        "claims": {
+          "__raw": "eyJhbGciOiJSUzI1NiIsImNhdCI6ImNsX0I3ZDRQRDExMUFBQSIsImtpZCI6Imluc18ydTA4WnJZRG95MXliWDZCcWh5ZGFJeXhXZnciLCJ0eXAiOiJKV1QifQ.eyJhenAiOiJodHRwOi8vbG9jYWxob3N0OjMwMDAiLCJleHAiOjE3NDUzNDc3MzgsImZ2YSI6WzE2MDksLTFdLCJpYXQiOjE3NDUzNDc2NzgsImlzcyI6Imh0dHBzOi8vY2hhcm1lZC1yb29zdGVyLTMuY2xlcmsuYWNjb3VudHMuZGV2IiwibmJmIjoxNzQ1MzQ3NjY4LCJzaWQiOiJzZXNzXzJ3MnNpRlFaRExranFKdWJTRkxQRDU3SUxGZiIsInN1YiI6InVzZXJfMncyc2lESzNmRXJjVVlOc2dJTG5KeE5BNGIxIn0.Zn3eoldvu223aF5dhBnBjeuCJ9yMhGXmJtDyGykKtwwcXOWnIYphdNF3swpEAtfZLJlxcRQubUhN_HvGKxisGbZ2no4K583KSULfeVI_gISZBFSJAk24hokDrNWzxWeV8D_TOhDq7mQlV1uJMsYW76E3YI3w5iocOUsAXqUTSgCTTToAlyHcWL5NvaJauBufbX3Milc7SapEM9W6o81uPxuX4jZ1Fru4A_DylWrEwIuBQcjSrS-pNFFIHnOHG9SrY-Awgj2scTGP5LNgq9jTdNENIpTcfdhI5Mre7fPg-NERGQs8bx4uYpk82z5puohY8001dXicBtad4yriP1mKhw",
+          "azp": "http://localhost:3000",
+          "exp": 1745347738,
+          "fva": [1609, -1],
+          "iat": 1745347678,
+          "iss": "https://charmed-rooster-3.clerk.accounts.dev",
+          "nbf": 1745347668,
+          "sid": "sess_2w2siFQZDLkjqJubSFLPD57ILFf",
+          "sub": "user_2w2siDK3fErcUYNsgILnJxNA4b1"
+        }
+      }
+    },
+    "lastActiveOrganizationId": null,
+    "actor": null,
+    "user": {
+      "id": "user_2w2siDK3fErcUYNsgILnJxNA4b1",
+      "pathRoot": "/me",
+      "externalId": null,
+      "username": "fonsicoding",
+      "emailAddresses": [
+        {
+          "id": "idn_2w2shLcK2Ygyt6LsZcwhwxT00Fa",
+          "pathRoot": "/me/email_addresses",
+          "emailAddress": "fonsicoding@gmail.com",
+          "matchesSsoConnection": false,
+          "linkedTo": [],
+          "verification": {
+            "pathRoot": "",
+            "status": "verified",
+            "strategy": "email_code",
+            "nonce": null,
+            "message": null,
+            "externalVerificationRedirectURL": null,
+            "attempts": 1,
+            "expireAt": "2025-04-21T16:08:40.928Z",
+            "error": null
+          }
+        }
+      ],
+      "phoneNumbers": [],
+      "web3Wallets": [],
+      "externalAccounts": [],
+      "enterpriseAccounts": [],
+      "passkeys": [],
+      "samlAccounts": [],
+      "organizationMemberships": [],
+      "passwordEnabled": true,
+      "firstName": "fonsiboi",
+      "lastName": "coder",
+      "fullName": "fonsiboi coder",
+      "primaryEmailAddressId": "idn_2w2shLcK2Ygyt6LsZcwhwxT00Fa",
+      "primaryEmailAddress": {
+        "id": "idn_2w2shLcK2Ygyt6LsZcwhwxT00Fa",
+        "pathRoot": "/me/email_addresses",
+        "emailAddress": "fonsicoding@gmail.com",
+        "matchesSsoConnection": false,
+        "linkedTo": [],
+        "verification": {
+          "pathRoot": "",
+          "status": "verified",
+          "strategy": "email_code",
+          "nonce": null,
+          "message": null,
+          "externalVerificationRedirectURL": null,
+          "attempts": 1,
+          "expireAt": "2025-04-21T16:08:40.928Z",
+          "error": null
+        }
+      },
+      "primaryPhoneNumberId": null,
+      "primaryPhoneNumber": null,
+      "primaryWeb3WalletId": null,
+      "primaryWeb3Wallet": null,
+      "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvdXBsb2FkZWQvaW1nXzJ3NXVOUk1sV25NUEZ0SVg1YzlBR203NVNnZCJ9",
+      "hasImage": true,
+      "twoFactorEnabled": false,
+      "totpEnabled": false,
+      "backupCodeEnabled": false,
+      "publicMetadata": {},
+      "unsafeMetadata": { "theme": "dark", "locale": "de" },
+      "createOrganizationEnabled": true,
+      "createOrganizationsLimit": null,
+      "deleteSelfEnabled": true,
+      "lastSignInAt": "2025-04-21T15:58:47.769Z",
+      "legalAcceptedAt": null,
+      "updatedAt": "2025-04-22T17:41:55.474Z",
+      "createdAt": "2025-04-21T15:58:47.759Z",
+      "cachedSessionsWithActivities": null
+    },
+    "publicUserData": {
+      "firstName": "fonsiboi",
+      "lastName": "coder",
+      "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvdXBsb2FkZWQvaW1nXzJ3NXVOUk1sV25NUEZ0SVg1YzlBR203NVNnZCJ9",
+      "hasImage": true,
+      "identifier": "fonsicoding@gmail.com"
+    },
+    "factorVerificationAge": [1609, -1],
+    "tasks": null,
+    "expireAt": "2025-04-28T15:58:47.769Z",
+    "abandonAt": "2025-05-21T15:58:47.769Z",
+    "createdAt": "2025-04-21T15:58:47.769Z",
+    "updatedAt": "2025-04-22T18:47:51.229Z"
+  }
+]
