@@ -1,6 +1,97 @@
 {
-  "HomePage": {
-    "title": "Hallo Welt!",
-    "about": "Gehe zur über seite"
+  "pages": {
+    "homePage": {
+      "heroTitle": "Hey! Ich bin",
+      "heroSubtitle": "Fullstack-Entwickler mit Fokus auf Design, Struktur und Performance. Ich verbinde visuelle Klarheit mit technischer Präzision.<br></br>Mein Ziel: digitale Produkte, die inspirieren und Zuverlässig sind."
+    },
+    "skillsPage": {
+      "card-0": {
+        "title": "Tech Skills",
+        "description": "Seit 2-3 Jahren arbeite ich aktiv mit JavaScript bzw. TypeScript, sowohl im Frontend als auch im Backend. Davor habe ich einige Jahre Erfahrung mit OOP in C# gesammelt und gestartet hat die Reise mit Java."
+      },
+      "card-1": {
+        "title": "Projekte",
+        "description": "Aktuell arbeite ich an einem Fullstack Smart-Home System, das bald Open Source verfügbar sein wird. Dazu erste Versuche mit mobilen Apps sowie diverse Web-, Desktop- und experimentelle Projekte."
+      },
+      "card-2": {
+        "title": "Soft Skills",
+        "description": "Teamwork und Kommunikation liegen mir - ich arbeite gerne gemeinsam an Projekten. Probleme packe ich kreativ an und bin immer motiviert, Neues zu lernen und Herausforderungen zu meistern."
+      },
+      "card-3": {
+        "title": "Kreative Skills",
+        "description": "Kreativ in UI/UX Design - liebe es, Interfaces in Figma zum Leben zu erwecken. Spielerisch mit Animationen und interaktiven Projekten experimentieren."
+      },
+      "card-4": {
+        "title": "Learning",
+        "description": "Immer neugierig und motiviert zu lernen - aktuell Deep Dive in IoT Device Communication über Sockets und MQTT sowie neue JS-Frameworks. TypeScript wird dabei ständig weiter vertieft."
+      },
+      "card-5": {
+        "title": "Fun / Extras",
+        "description": "Open Source, kleine Experimente und Gaming-Projekte gehören zu meinen Hobbys. Liebe es, kreative Ideen auszuprobieren und spielerisch Neues zu entwickeln."
+      }
+    },
+    "projectsPage": {},
+    "contactPage": {
+      "title": "Kontakt aufnehmen!",
+      "subtitle": "Ich freue mich über interessante Projekte, Kooperationen oder einfach einen freundlichen Austausch. Schreib mir gerne eine Nachricht – ich melde mich so schnell wie möglich zurück!",
+      "manually": "Oder kontaktiere mich einfach direkt unter",
+      "form": {
+        "title": "Kontaktiere mich",
+        "description": "Gib einfach deine Daten und eine Nachricht ein :)"
+      },
+      "toast": {
+        "success": "Nachricht gesendet!",
+        "error": "Es ist ein Fehler beim senden der Nachricht aufgetreten!"
+      }
+    },
+    "newsPage": {}
+  },
+  "components": {
+    "navbar": {
+      "navHome": "Startseite",
+      "navSkills": "Fähigkeiten",
+      "navProjects": "Projekte",
+      "navContact": "Kontakt",
+      "navNews": "Neuigkeiten"
+    }
+  },
+  "labels": {
+    "button": {
+      "submit": "Absenden",
+      "cancel": "Abbrechen",
+      "reset": "Zurücksetzen",
+      "contact-me": "Kontaktiere mich",
+      "loading": "Lade ..."
+    },
+    "field": {
+      "name": {
+        "label": "Name",
+        "inner": "Name"
+      },
+      "email": {
+        "label": "E-Mail-Adresse",
+        "inner": "Deine E-Mail"
+      },
+      "message": {
+        "label": "Nachricht",
+        "inner": "Nachricht eingeben..."
+      }
+    }
+  },
+  "errors": {
+    "error": "Ein Fehler ist aufgetreten"
+  },
+  "zod": {
+    "fullName": {
+      "min": "Der Name muss mindestens 5 Zeichen lang sein.",
+      "max": "Der Name darf höchstens 32 Zeichen lang sein."
+    },
+    "email": {
+      "invalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein."
+    },
+    "message": {
+      "min": "Die Nachricht muss mindestens 10 Zeichen lang sein.",
+      "max": "Die Nachricht darf höchstens 600 Zeichen lang sein."
+    }
   }
 }

@@ -1,37 +1,27 @@
 "use client";
 
-import { useTheme } from "next-themes";
-import Image from "next/image";
-import logoSmallDark from "@/../public/logo/logo-small-dark.png";
-import logoSmallLight from "@/../public/logo/logo-small-light.png";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Bell, Clock, Github, Languages, Sun } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { usePathname } from "next/navigation";
 import NavLinks from "@/components/pages/landing-page/nav-links";
-import { Badge } from "@/components/ui/badge";
-import IconWithBadge from "@/components/utils/icon-with-badge";
-import ThemeToggler from "@/components/themes/theme-toggler";
 import LanguageSwitcher from "@/components/languages/language-switcher";
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
+import { useTranslations } from "next-intl";
 
 const Navbar = () => {
-  const { resolvedTheme } = useTheme();
-  const pathname = usePathname();
-
   const [mounted, setMounted] = useState(false);
+  const t = useTranslations("components.navbar");
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
   const pageLinks = [
-    { href: "/", label: "Home" },
-    { href: "/skills", label: "Skills" },
-    { href: "/projects", label: "Projects" },
-    { href: "/contact", label: "Contact" },
-    { href: "/news", label: "News" },
+    { href: "/", label: t("navHome") },
+    { href: "/skills", label: t("navSkills") },
+    { href: "/projects", label: t("navProjects") },
+    { href: "/contact", label: t("navContact") },
+    { href: "/news", label: t("navNews") },
   ];
 
   if (!mounted) return null;

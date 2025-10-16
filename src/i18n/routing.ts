@@ -1,10 +1,9 @@
-import { defineRouting } from 'next-intl/routing';
-import { createNavigation } from 'next-intl/navigation';
+import { defineRouting } from "next-intl/routing";
+import { createNavigation } from "next-intl/navigation";
 
 export const languages = [
-  ['en', 'English'],
-  ['de', 'Deutsch'],
-  ['cn', 'Chinese'],
+  ["en", "English"],
+  ["de", "Deutsch"],
 ];
 
 export const routing = defineRouting({
@@ -12,7 +11,7 @@ export const routing = defineRouting({
   locales: languages.map(([code]) => code),
 
   // Used when no locale matches
-  defaultLocale: 'en',
+  defaultLocale: "en",
 });
 
 export type Locale = (typeof routing.locales)[number];

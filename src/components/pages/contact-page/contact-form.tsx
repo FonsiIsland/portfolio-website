@@ -3,25 +3,11 @@
 import React, { useState } from "react";
 import {
   Field,
-  FieldContent,
-  FieldDescription,
   FieldError,
   FieldGroup,
   FieldLabel,
-  FieldLegend,
-  FieldSeparator,
-  FieldSet,
-  FieldTitle,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { Switch } from "@/components/ui/switch";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Controller, useForm } from "react-hook-form";
 import * as z from "zod";
@@ -39,8 +25,12 @@ import { Spinner } from "@/components/ui/spinner";
 import { formSchema } from "@/schemas/schemas";
 import { send } from "@/actions/email";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 const ContactForm = () => {
+  const t = useTranslations("pages.contactPage");
+  const tButton = useTranslations("labels.button");
+  const tField = useTranslations("labels.field");
   const [loading, setLoading] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -58,13 +48,10 @@ const ContactForm = () => {
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     try {
       setLoading(true);
-      console.log("Client send to server", data);
       const response = await send(data);
 
-      //   const response = { success: true, error: null };
-
-      if (response.success) toast.success("Message sent!");
-      else toast.error("An error occured during sending that message!");
+      if (response.success) toast.success(t("toast.success"));
+      else toast.error(t("toast.error"));
 
       form.reset();
     } finally {
@@ -75,8 +62,8 @@ const ContactForm = () => {
   return (
     <Card className="w-full rounded-4xl">
       <CardHeader>
-        <CardTitle className="text-2xl">Contact Me</CardTitle>
-        <CardDescription>Just enter your data and a message :)</CardDescription>
+        <CardTitle className="text-2xl">{t("form.title")}</CardTitle>
+        <CardDescription>{t("form.description")}</CardDescription>
       </CardHeader>
       <CardContent>
         <form id="form-contact" onSubmit={form.handleSubmit(onSubmit)}>
@@ -88,13 +75,13 @@ const ContactForm = () => {
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
                     <FieldLabel htmlFor="form-contact-fullName">
-                      Name
+                      {tField("name.label")}
                     </FieldLabel>
                     <Input
                       {...field}
                       id="form-contact-fullName"
                       aria-invalid={fieldState.invalid}
-                      placeholder="Name"
+                      placeholder={tField("name.inner")}
                       autoComplete="off"
                     />
                     {fieldState.invalid && (
@@ -110,13 +97,13 @@ const ContactForm = () => {
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
                     <FieldLabel htmlFor="form-contact-email">
-                      Email Adress
+                      {tField("email.label")}
                     </FieldLabel>
                     <Input
                       {...field}
                       id="form-contact-email"
                       aria-invalid={fieldState.invalid}
-                      placeholder="Yout email"
+                      placeholder={tField("email.inner")}
                       autoComplete="off"
                     />
                     {fieldState.invalid && (
@@ -132,14 +119,14 @@ const ContactForm = () => {
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
                   <FieldLabel htmlFor="form-contact-message">
-                    Message
+                    {tField("message.label")}
                   </FieldLabel>
                   <Textarea
                     {...field}
                     id="form-contact-message"
                     aria-invalid={fieldState.invalid}
-                    maxLength={600}
-                    placeholder="Type a message..."
+                    maxLength={700}
+                    placeholder={tField("message.inner")}
                     rows={4}
                     className="resize-none"
                   />
@@ -150,18 +137,6 @@ const ContactForm = () => {
                 </Field>
               )}
             />
-            {/* <Field>
-              <FieldLabel htmlFor="feedback">Feedback</FieldLabel>
-              <Textarea
-                maxLength={600}
-                id="feedback"
-                placeholder="Your feedback helps us improve..."
-                rows={4}
-              />
-              <FieldDescription>
-                Share your thoughts about our service.
-              </FieldDescription>
-            </Field> */}
           </FieldGroup>
         </form>
       </CardContent>
@@ -172,23 +147,23 @@ const ContactForm = () => {
             type="button"
             variant="outline"
             onClick={() => form.reset()}
-            disabled={loading} // disable reset while loading optional
+            disabled={loading}
           >
-            Reset
+            {tButton("reset")}
           </Button>
           <Button
             className="flex-1"
             type="submit"
             form="form-contact"
-            disabled={loading} // Button deaktivieren während Loading
+            disabled={loading}
           >
             {loading ? (
               <div className="flex items-center justify-center gap-2">
                 <Spinner />
-                Loading...
+                {tButton("loading")}
               </div>
             ) : (
-              "Submit"
+              tButton("submit")
             )}
           </Button>
         </Field>

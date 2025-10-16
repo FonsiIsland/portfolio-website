@@ -1,11 +1,98 @@
 {
-  "HomePage": {
-    "title": "Hello world!",
-    "about": "Go to the about page"
+  "pages": {
+    "homePage": {
+      "heroTitle": "Hi! I'm",
+      "heroSubtitle": "Fullstack Developer focused on design, structure, and performance. I combine visual clarity with technical precision.<br></br>My goal: digital products that inspire and deliver reliability."
+    },
+    "skillsPage": {
+      "card-0": {
+        "title": "Tech Skills",
+        "description": "For 2-3 years, I have been actively working with JavaScript and TypeScript, both frontend and backend. Previously, I gained several years of experience with OOP in C#, and my journey started with Java."
+      },
+      "card-1": {
+        "title": "Projects",
+        "description": "Currently, I am working on a fullstack smart home system that will soon be open source. Additionally, I have initial experiments with mobile apps and various web, desktop, and experimental projects."
+      },
+      "card-2": {
+        "title": "Soft Skills",
+        "description": "Teamwork and communication are important to me - I enjoy collaborating on projects. I tackle problems creatively and am always motivated to learn new things and overcome challenges."
+      },
+      "card-3": {
+        "title": "Creative Skills",
+        "description": "Creative in UI/UX design - I love bringing interfaces to life in Figma. I enjoy experimenting playfully with animations and interactive projects."
+      },
+      "card-4": {
+        "title": "Learning",
+        "description": "Always curious and motivated to learn - currently diving into IoT device communication via sockets and MQTT, as well as exploring new JS frameworks. Continuously deepening TypeScript knowledge."
+      },
+      "card-5": {
+        "title": "Fun / Extras",
+        "description": "Open source, small experiments, and gaming projects are part of my hobbies. I love trying out creative ideas and developing new things playfully."
+      }
+    },
+    "projectsPage": {},
+    "contactPage": {
+      "title": "Let's get In Touch!",
+      "subtitle": "I'm excited about interesting projects, collaborations, or just a friendly exchange. Feel free to send me a message - I'll get back to you as soon as possible!",
+      "manually": "Or just reach out manually to",
+      "form": {
+        "title": "Contact me",
+        "description": "Just enter your data and a message :)"
+      },
+      "toast": {
+        "success": "Message sent!",
+        "error": "An error occured while trying to send your message!"
+      }
+    },
+    "newsPage": {}
   },
-  "AuthPage": {
-    "LoginPage": {
-      "title": "Login Boii"
+  "components": {
+    "navbar": {
+      "navHome": "Home",
+      "navSkills": "Skills",
+      "navProjects": "Projects",
+      "navContact": "Contact",
+      "navNews": "News"
+    }
+  },
+  "labels": {
+    "button": {
+      "submit": "Submit",
+      "cancel": "Cancel",
+      "reset": "Reset",
+      "contact-me": "Contact me",
+      "loading": "Loading ..."
+    },
+    "field": {
+      "name": {
+        "label": "Name",
+        "inner": "Name"
+      },
+      "email": {
+        "label": "Email Adress",
+        "inner": "Your Email"
+      },
+      "message": {
+        "label": "Message",
+        "inner": "Type a message..."
+      }
+    }
+  },
+  "errors": {
+    "error": "An error occured"
+  },
+
+  "zod": {
+    "fullName": {
+      "min": "Full name must be at least 5 characters long.",
+      "max": "Full name must be at most 32 characters long."
+    },
+    "email": {
+      "invalid": "Please enter a valid email address."
+    },
+    "message": {
+      "min": "Message must be at least 10 characters long.",
+      "max": "Message must be at most 600 characters long."
     }
   }
 }
