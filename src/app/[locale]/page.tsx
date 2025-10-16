@@ -67,7 +67,8 @@ const HomePage = () => {
               {/*  // Hey! Ich bin Stefan - Hi! Ich mein Name ist Stefan*/}
               <TypingAnimation
                 words={[
-                  "Web Developer 🎨", // klassischer Entwickler-Look
+                  "Fullstack Dev ⚡",
+                  "Web Dev 🎨", // klassischer Entwickler-Look
                   "Api Designer 🔌", // Stecker für API-Verbindungen
                   "Backend Dev 🧩", // Puzzle für Backend-Logik
                 ]}
@@ -126,7 +127,6 @@ const HomePage = () => {
         <Button onClick={() => signOut()}>sign in with keycloak</Button> * /}
       </div> */}
       </div>
-      <LightRays />
     </main>
   );
 };

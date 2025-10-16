@@ -3,12 +3,13 @@ import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { ThemeProvider } from "@/components/themes/theme-provider";
-import "../globals.css";
 import { Metadata } from "next";
 import Navbar from "@/components/pages/landing-page/navbar";
 import ReactQueryProvider from "@/components/react-query/react-query-provider";
 import { Inter, Jersey_10 } from "next/font/google";
 import { cn } from "@/lib/utils";
+import { Toaster } from "@/components/ui/sonner";
+import { LightRays } from "@/components/ui/light-rays";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -64,6 +65,8 @@ export default async function RootLayout({
               <ReactQueryProvider>
                 <Navbar />
                 <div className="overflow-hidden">{children}</div>
+                <Toaster position="bottom-right" />
+                <LightRays />
               </ReactQueryProvider>
             </div>
           </NextIntlClientProvider>

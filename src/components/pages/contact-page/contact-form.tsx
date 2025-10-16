@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import {
   Field,
   FieldContent,
@@ -35,20 +35,14 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-
-const formSchema = z.object({
-  fullName: z
-    .string()
-    .min(5, "Full name must be at least 5 characters long.")
-    .max(32, "Full name must be at most 32 characters long."),
-  email: z.string().email("Please enter a valid email address."),
-  message: z
-    .string()
-    .min(10, "Message must be at least 10 characters long.")
-    .max(500, "Message must be at most 600 characters long."),
-});
+import { Spinner } from "@/components/ui/spinner";
+import { formSchema } from "@/schemas/schemas";
+import { send } from "@/actions/email";
+import { toast } from "sonner";
 
 const ContactForm = () => {
+  const [loading, setLoading] = useState(false);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -58,10 +52,25 @@ const ContactForm = () => {
     },
   });
 
-  function onSubmit(data: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    console.log(data);
-  }
+  console.log("ADD VERCEL FIREWAALL FOR RATE LIMITTING CONTACT APGE");
+  console.log("ADD VERCEL FIREWAALL FOR RATE LIMITTING CONTACT APGE");
+
+  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    try {
+      setLoading(true);
+      console.log("Client send to server", data);
+      const response = await send(data);
+
+      //   const response = { success: true, error: null };
+
+      if (response.success) toast.success("Message sent!");
+      else toast.error("An error occured during sending that message!");
+
+      form.reset();
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <Card className="w-full rounded-4xl">
@@ -163,11 +172,24 @@ const ContactForm = () => {
             type="button"
             variant="outline"
             onClick={() => form.reset()}
+            disabled={loading} // disable reset while loading optional
           >
             Reset
           </Button>
-          <Button className="flex-1" type="submit" form="form-contact">
-            Submit
+          <Button
+            className="flex-1"
+            type="submit"
+            form="form-contact"
+            disabled={loading} // Button deaktivieren während Loading
+          >
+            {loading ? (
+              <div className="flex items-center justify-center gap-2">
+                <Spinner />
+                Loading...
+              </div>
+            ) : (
+              "Submit"
+            )}
           </Button>
         </Field>
       </CardFooter>

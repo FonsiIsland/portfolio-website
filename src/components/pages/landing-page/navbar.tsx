@@ -26,10 +26,6 @@ const Navbar = () => {
     setMounted(true);
   }, []);
 
-  useEffect(() => {
-    console.log(pathname);
-  }, [pathname]);
-
   const pageLinks = [
     { href: "/", label: "Home" },
     { href: "/skills", label: "Skills" },
@@ -64,7 +60,7 @@ const Navbar = () => {
 
         <LanguageSwitcher />
 
-        <AnimatedThemeToggler />
+        <AnimatedThemeToggler className="hover:text-card-foreground-v-1 size-6 transition-colors" />
 
         {/* <ThemeToggler /> */}
 

@@ -13,15 +13,12 @@ const NavLinks = ({ links }: { links: { href: string; label: string }[] }) => {
   return (
     <div className="relative flex gap-8">
       {links.map(({ href, label }) => {
-        console.log(pathname);
         const isActive =
           href === "/"
             ? pathname.length === 3
             : pathname === href ||
               pathname.startsWith(href) ||
               pathname.includes(href);
-
-        console.log(isActive, href);
 
         return (
           <Link
