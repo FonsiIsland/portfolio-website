@@ -26,16 +26,14 @@ const NavLinks = ({ links }: { links: { href: string; label: string }[] }) => {
             href={href}
             className={cn(
               "relative pb-1 transition-colors",
-              isActive
-                ? "text-card-foreground"
-                : "hover:text-card-foreground-v-1"
+              isActive ? "text-text" : "hover:text-text"
             )}
           >
             {label}
             {isActive && (
               <motion.div
                 layoutId={"underline-" + id}
-                className="absolute left-1 bottom-0 h-[2px] w-[calc(100%-8px)] bg-card-foreground"
+                className="absolute left-1 bottom-0 h-[2px] w-[calc(100%-8px)] bg-text"
                 transition={{ type: "spring", stiffness: 500, damping: 30 }}
               />
             )}

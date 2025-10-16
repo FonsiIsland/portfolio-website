@@ -81,7 +81,7 @@ const HomePage = () => {
               />
             </div>
 
-            <p className="w-[600px] text-base text-card-foreground-v-1">
+            <p className="w-[600px] text-base font-light">
               {/* Fullstack Developer mit Fokus auf Design, Struktur und
               Performance. Ich verbinde visuelle Klarheit mit technischer
               Präzision.

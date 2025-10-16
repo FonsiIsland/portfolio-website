@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { cn } from '@/lib/utils';
-import { Languages } from 'lucide-react';
-import { useLocale } from 'next-intl';
-import { usePathname, useRouter } from '@/i18n/navigation';
-import { useParams } from 'next/navigation';
-import { languages, Locale, routing } from '@/i18n/routing';
-import { DynamicIcon } from '@/components/utils/icons';
+} from "@/components/ui/dropdown-menu";
+import { cn } from "@/lib/utils";
+import { Languages } from "lucide-react";
+import { useLocale } from "next-intl";
+import { usePathname, useRouter } from "@/i18n/navigation";
+import { useParams } from "next/navigation";
+import { languages, Locale, routing } from "@/i18n/routing";
+import { DynamicIcon } from "@/components/utils/icons";
 
 const LanguageSwitcher = () => {
   const locale = useLocale();
@@ -24,10 +24,13 @@ const LanguageSwitcher = () => {
     return routing.locales.map((local: Locale) => (
       <DropdownMenuItem
         key={local}
-        className={cn(locale === local ? 'bg-accent' : '')}
+        className={cn(locale === local ? "bg-accent/10" : "")}
         onClick={() => onSelectChange(local)}
       >
-        <DynamicIcon countryCode={local} iconProps={{ className: 'w-[16px] h-[16px] align-middle' }} />
+        <DynamicIcon
+          countryCode={local}
+          iconProps={{ className: "w-[16px] h-[16px] align-middle" }}
+        />
         {languages.find(([lang]) => lang === local)?.[1]}
       </DropdownMenuItem>
     ));
@@ -46,12 +49,15 @@ const LanguageSwitcher = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <div className='hover:text-card-foreground-v-1 size-6 transition-colors'>
+        <div className="hover:text-text size-6 transition-colors">
           <Languages />
-          <span className='sr-only'>Switch Language</span>
+          <span className="sr-only">Switch Language</span>
         </div>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align='end' className='flex flex-col gap-1'>
+      <DropdownMenuContent
+        align="end"
+        className="flex flex-col gap-1 border-text/10"
+      >
         {createSelectItems()}
       </DropdownMenuContent>
     </DropdownMenu>

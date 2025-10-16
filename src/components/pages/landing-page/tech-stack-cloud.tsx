@@ -81,6 +81,8 @@ const slugs = [
   "firebase",
   "git",
   "prisma",
+  "json",
+  "postman",
 ];
 
 export function TechStackCloud() {
@@ -99,6 +101,9 @@ export function TechStackCloud() {
   }, [resolvedTheme]);
 
   useEffect(() => {
+    if (images.length === 0) return;
+    cloudRef.current?.focusIcon(0);
+
     const interval = setInterval(() => {
       setIndex((prev) => {
         const next = prev < images.length - 1 ? prev + 1 : 0;

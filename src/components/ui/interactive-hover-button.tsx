@@ -1,6 +1,6 @@
-import { ArrowRight } from "lucide-react"
+import { ArrowRight } from "lucide-react";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
 export function InteractiveHoverButton({
   children,
@@ -10,7 +10,7 @@ export function InteractiveHoverButton({
   return (
     <button
       className={cn(
-        "group bg-background relative w-auto cursor-pointer overflow-hidden rounded-full border p-2 px-6 text-center font-semibold",
+        "group bg-bg relative w-auto cursor-pointer overflow-hidden rounded-full border border-text/10 p-2 px-6 text-center font-semibold",
         className
       )}
       {...props}
@@ -21,10 +21,10 @@ export function InteractiveHoverButton({
           {children}
         </span>
       </div>
-      <div className="text-primary-foreground absolute top-0 z-10 flex h-full w-full translate-x-12 items-center justify-center gap-2 opacity-0 transition-all duration-300 group-hover:-translate-x-5 group-hover:opacity-100">
+      <div className="text-bg absolute top-0 z-10 flex h-full w-full translate-x-12 items-center justify-center gap-2 opacity-0 transition-all duration-300 group-hover:-translate-x-5 group-hover:opacity-100">
         <span>{children}</span>
         <ArrowRight />
       </div>
     </button>
-  )
+  );
 }
