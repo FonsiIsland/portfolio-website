@@ -3,6 +3,7 @@
 import { IconCloud } from "@/components/magicui/icon-cloud";
 import { IconCloudReworked } from "@/components/magicui/icon-cloud-reworked";
 import { m } from "framer-motion";
+import { useTheme } from "next-themes";
 import { useEffect, useRef, useState } from "react";
 
 // const slugs = [
@@ -38,36 +39,64 @@ import { useEffect, useRef, useState } from "react";
 //   "figma",
 // ];
 
+// const slugs = [
+//   "android-studio",
+//   "csharp",
+//   "css3",
+//   "electron",
+//   "express",
+//   "figma",
+//   "firebase",
+//   "git",
+//   "github",
+//   "html5",
+//   "java",
+//   "javascript",
+//   "nextjs",
+//   "nodedotjs",
+//   "prisma",
+//   "react",
+//   "typescript",
+//   "visual-studio",
+//   "vs-code",
+// ];
+
 const slugs = [
-  "android-studio",
-  "csharp",
+  "javascript",
+  "typescript",
+  "react",
+  "html5",
   "css3",
   "electron",
+  "nextjs",
   "express",
+  "nodedotjs",
+  "csharp",
+  "java",
+  "vs-code",
+  "visual-studio",
+  "android-studio",
+  "github",
   "figma",
   "firebase",
   "git",
-  "github",
-  "html5",
-  "java",
-  "javascript",
-  "nextjs",
-  "nodedotjs",
   "prisma",
-  "react",
-  "typescript",
-  "visual-studio",
-  "vs-code",
 ];
 
 export function TechStackCloud() {
-  // const images = slugs.map((slug) => `https://cdn.simpleicons.org/${slug}`);
+  const { resolvedTheme } = useTheme();
 
-  const images = slugs.map((slug) => `/brand-icons/png/dark/${slug}.png`);
+  // const images = slugs.map((slug) => `https://cdn.simpleicons.org/${slug}`);
+  const [images, setImages] = useState<string[]>([]);
 
   const [index, setIndex] = useState(0);
-
   const cloudRef = useRef<{ focusIcon: (index: number) => void }>(null);
+
+  useEffect(() => {
+    setImages(
+      slugs.map((slug) => `/brand-icons/png/${resolvedTheme}/${slug}.png`)
+    );
+  }, [resolvedTheme]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -80,12 +109,12 @@ export function TechStackCloud() {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [images, cloudRef]);
+  }, [cloudRef, images]);
 
   return (
     <div className="relative flex size-full items-center justify-center overflow-hidden">
       {/* <IconCloud images={images} /> */}
-      <IconCloudReworked ref={cloudRef} images={images} />
+      <IconCloudReworked ref={cloudRef} images={images} sizeScale={1.6} />
     </div>
   );
 }

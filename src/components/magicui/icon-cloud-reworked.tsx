@@ -21,6 +21,7 @@ interface Icon {
 interface IconCloudReworkedProps {
   icons?: React.ReactNode[];
   images?: string[];
+  sizeScale?: number; // 🔹 optionaler Prop, um die Gesamtgröße zu skalieren
 }
 
 function easeOutCubic(t: number): number {
@@ -28,7 +29,7 @@ function easeOutCubic(t: number): number {
 }
 
 export const IconCloudReworked = forwardRef(function IconCloudReworked(
-  { icons, images }: IconCloudReworkedProps,
+  { icons, images, sizeScale = 1 }: IconCloudReworkedProps,
   ref
 ) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -51,7 +52,15 @@ export const IconCloudReworked = forwardRef(function IconCloudReworked(
   const iconCanvasesRef = useRef<HTMLCanvasElement[]>([]);
   const imagesLoadedRef = useRef<boolean[]>([]);
 
-  // --- Externe Methode: focusIcon(index) ---
+  // --- Settings ---
+  const BASE_ICON_SIZE = 60;
+  const resolution =
+    typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1;
+  const ICON_SIZE = BASE_ICON_SIZE * resolution;
+  const RADIUS = 100 * sizeScale; // 🔹 Sphärenradius skalierbar
+  const CANVAS_BASE_SIZE = 400 * sizeScale; // 🔹 Canvasgröße
+
+  // --- focusIcon() extern aufrufbar ---
   useImperativeHandle(ref, () => ({
     focusIcon: (index: number) => {
       const icon = iconPositions[index];
@@ -90,11 +99,18 @@ export const IconCloudReworked = forwardRef(function IconCloudReworked(
     imagesLoadedRef.current = new Array(items.length).fill(false);
 
     const newIconCanvases = items.map((item, index) => {
+      const ICON_DISPLAY_SIZE = BASE_ICON_SIZE; // z. B. 80px auf der Sphäre
+      const ICON_HIGH_RES = ICON_DISPLAY_SIZE * 4; // 3x höher aufgelöst
+
       const offscreen = document.createElement("canvas");
-      offscreen.width = 120;
-      offscreen.height = 120;
+      offscreen.width = ICON_HIGH_RES;
+      offscreen.height = ICON_HIGH_RES;
       const offCtx = offscreen.getContext("2d");
       if (!offCtx) return offscreen;
+      offCtx.scale(
+        ICON_HIGH_RES / ICON_DISPLAY_SIZE,
+        ICON_HIGH_RES / ICON_DISPLAY_SIZE
+      );
 
       if (images) {
         const img = new Image();
@@ -102,10 +118,16 @@ export const IconCloudReworked = forwardRef(function IconCloudReworked(
         img.src = items[index] as string;
         img.onload = () => {
           offCtx.clearRect(0, 0, offscreen.width, offscreen.height);
-          offCtx.beginPath();
-          offCtx.arc(60, 60, 60, 0, Math.PI * 2);
-          offCtx.clip();
-          offCtx.drawImage(img, 0, 0, 120, 120);
+          // offCtx.beginPath();
+          // offCtx.arc(
+          //   ICON_SIZE / 2,
+          //   ICON_SIZE / 2,
+          //   ICON_SIZE / 2,
+          //   0,
+          //   Math.PI * 2
+          // );
+          // offCtx.clip();
+          offCtx.drawImage(img, 0, 0, ICON_SIZE, ICON_SIZE);
           imagesLoadedRef.current[index] = true;
         };
       } else {
@@ -122,7 +144,7 @@ export const IconCloudReworked = forwardRef(function IconCloudReworked(
     });
 
     iconCanvasesRef.current = newIconCanvases;
-  }, [icons, images]);
+  }, [icons, images, ICON_SIZE]);
 
   // --- Sphere generieren ---
   useEffect(() => {
@@ -142,16 +164,30 @@ export const IconCloudReworked = forwardRef(function IconCloudReworked(
       const z = Math.sin(phi) * r;
 
       newIcons.push({
-        x: x * 100,
-        y: y * 100,
-        z: z * 100,
+        x: x * RADIUS,
+        y: y * RADIUS,
+        z: z * RADIUS,
         scale: 1,
         opacity: 1,
         id: i,
       });
     }
     setIconPositions(newIcons);
-  }, [icons, images]);
+  }, [icons, images, RADIUS]);
+
+  // // --- Canvas schärfer machen (Retina) ---
+  // useEffect(() => {
+  //   const canvas = canvasRef.current;
+  //   if (!canvas) return;
+  //   const ctx = canvas.getContext("2d");
+  //   if (!ctx) return;
+
+  //   canvas.width = CANVAS_BASE_SIZE * resolution;
+  //   canvas.height = CANVAS_BASE_SIZE * resolution;
+  //   canvas.style.width = `${CANVAS_BASE_SIZE}px`;
+  //   canvas.style.height = `${CANVAS_BASE_SIZE}px`;
+  //   ctx.scale(resolution, resolution);
+  // }, [CANVAS_BASE_SIZE, resolution]);
 
   // --- Maussteuerung ---
   const handleMouseDown = (e: React.MouseEvent<HTMLCanvasElement>) => {
@@ -186,7 +222,7 @@ export const IconCloudReworked = forwardRef(function IconCloudReworked(
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // smooth inertia
+      // inertia
       if (!isDragging && !targetRotation) {
         rotationRef.current.y += velocityRef.current.x;
         rotationRef.current.x += velocityRef.current.y;
@@ -195,7 +231,7 @@ export const IconCloudReworked = forwardRef(function IconCloudReworked(
         velocityRef.current.y *= 0.95;
       }
 
-      // smooth focus rotation
+      // focus rotation easing
       if (targetRotation) {
         const elapsed = performance.now() - targetRotation.startTime;
         const progress = Math.min(1, elapsed / targetRotation.duration);
@@ -230,12 +266,21 @@ export const IconCloudReworked = forwardRef(function IconCloudReworked(
           canvas.width / 2 + rotatedX,
           canvas.height / 2 + rotatedY
         );
+
         ctx.scale(scale, scale);
+
         ctx.globalAlpha = opacity;
+        // ctx.filter = `brightness(${opacity * 100}%)`; // reduziert Helligkeit, keine echte Transparenz
 
         if (icons || images) {
           if (iconCanvasesRef.current[i] && imagesLoadedRef.current[i]) {
-            ctx.drawImage(iconCanvasesRef.current[i], -20, -20, 40, 40);
+            ctx.drawImage(
+              iconCanvasesRef.current[i],
+              -BASE_ICON_SIZE / 2,
+              -BASE_ICON_SIZE / 2,
+              BASE_ICON_SIZE,
+              BASE_ICON_SIZE
+            );
           }
         } else {
           ctx.beginPath();
@@ -258,7 +303,14 @@ export const IconCloudReworked = forwardRef(function IconCloudReworked(
     animate();
 
     return () => cancelAnimationFrame(animationFrameRef.current);
-  }, [iconPositions, isDragging, targetRotation, icons, images]);
+  }, [
+    iconPositions,
+    isDragging,
+    targetRotation,
+    icons,
+    images,
+    CANVAS_BASE_SIZE,
+  ]);
 
   return (
     <canvas
