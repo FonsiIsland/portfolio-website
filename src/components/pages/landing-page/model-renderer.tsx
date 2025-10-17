@@ -1,7 +1,13 @@
 "use client";
 
 // ModelViewer.tsx
-import React, { Suspense, useEffect, useRef, useState } from "react";
+import React, {
+  Suspense,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import {
   Environment,
@@ -9,7 +15,13 @@ import {
   TransformControls,
   useGLTF,
 } from "@react-three/drei";
-import { AnimationClip, AnimationMixer, Group, LoopOnce } from "three";
+import {
+  AnimationAction,
+  AnimationClip,
+  AnimationMixer,
+  Group,
+  LoopOnce,
+} from "three";
 import { gt } from "zod";
 
 // Typisierung für das Ergebnis von useGLTF, falls du auf Nodes / Materials zugreifen willst
@@ -26,23 +38,57 @@ interface ModelProps {
 
 const Model = React.forwardRef<Group, ModelProps>(({ url }, ref) => {
   const gltf = useGLTF(url) as GLTFResult;
-  const mixer = useRef<AnimationMixer>(null);
-  const idleAction = useRef<any>(null);
-  const waveAction = useRef<any>(null);
+  const mixer = useRef<AnimationMixer | null>(null);
+  const idleAction = useRef<AnimationAction | null>(null);
+  const waveAction = useRef<AnimationAction | null>(null);
+  const currentActionRef = useRef<AnimationAction | null>(null);
+
   const idleCounter = useRef(0);
+
+  // Cross-Fading Funktion
+  const fadeToAction = useCallback(
+    (targetAction: AnimationAction, duration = 0.3) => {
+      if (!mixer.current || !targetAction) return;
+
+      const currentAction = currentActionRef.current; // Lese den aktuellen Action-Zustand über Ref
+
+      if (targetAction === currentAction) {
+        // Wenn die Ziel-Action bereits läuft, tue nichts
+        return;
+      }
+
+      if (currentAction) {
+        // Führt den Cross-Fade von der aktuellen zur Ziel-Action durch
+        currentAction
+          // 'true' stoppt die ausgehende Action am Ende des Fades.
+          .crossFadeTo(targetAction, duration, true)
+          .play();
+      } else {
+        // Initialer Start ohne Fade
+        targetAction.reset().play();
+      }
+
+      // Setze die neue Action als aktuell im Ref
+      currentActionRef.current = targetAction;
+    },
+    []
+  );
 
   useEffect(() => {
     if (gltf.animations && gltf.animations.length > 0) {
       mixer.current = new AnimationMixer(gltf.scene);
 
-      // Idle Animation
       const idleClip = AnimationClip.findByName(
         gltf.animations,
         "New-Idle-Animation"
       );
-      if (idleClip) idleAction.current = mixer.current.clipAction(idleClip);
+      if (idleClip) {
+        idleAction.current = mixer.current.clipAction(idleClip);
+        idleAction.current.loop = LoopOnce; // Nur einmal abspielen
+        idleAction.current.clampWhenFinished = true; // Position am Ende halten
+        idleAction.current.enabled = true;
+      }
 
-      // Wave Animation
       const waveClip = AnimationClip.findByName(
         gltf.animations,
         "New-Waving-Animation"
@@ -51,43 +97,51 @@ const Model = React.forwardRef<Group, ModelProps>(({ url }, ref) => {
         waveAction.current = mixer.current.clipAction(waveClip);
         waveAction.current.loop = LoopOnce;
         waveAction.current.clampWhenFinished = true;
+        waveAction.current.enabled = true;
       }
 
       const playIdle = () => {
-        if (!idleAction.current) return;
-        idleAction.current.reset();
-        idleAction.current.play();
+        if (idleAction.current) {
+          idleAction.current.reset(); // Stelle sicher, dass sie von vorne startet
+          fadeToAction(idleAction.current, 0.3);
+        }
       };
 
       const playWave = () => {
-        if (!waveAction.current) return;
-        waveAction.current.reset();
-        waveAction.current.play();
+        if (waveAction.current) {
+          waveAction.current.reset(); // Auch hier immer vom Anfang
+          fadeToAction(waveAction.current, 0.3);
+        }
       };
 
-      // Listener für fertige Animationen
-      mixer.current.addEventListener("finished", (e) => {
-        console.log("finisehd ");
+      const onFinished = (e: any) => {
         const action = e.action;
+
         if (action === idleAction.current) {
           idleCounter.current++;
-          if (idleCounter.current >= 1) {
+          // Mit Wahrscheinlichkeit 20% Wave abspielen
+          if (idleCounter.current >= 2 && Math.random() < 0.5) {
             idleCounter.current = 0;
-            if (Math.random() < 0.9) {
-              playWave();
-              return;
-            }
+            playWave();
+          } else {
+            playIdle();
           }
-          playIdle(); // nächste Idle
         } else if (action === waveAction.current) {
-          playIdle(); // nach Wave wieder Idle starten
+          playIdle();
         }
-      });
+      };
 
-      // Start
+      mixer.current.addEventListener("finished", onFinished);
+
+      // Start mit Idle
       playIdle();
+
+      return () => {
+        mixer.current?.removeEventListener("finished", onFinished);
+        currentActionRef.current = null;
+      };
     }
-  }, [gltf]);
+  }, [gltf, fadeToAction]);
 
   useFrame((_, delta) => mixer.current?.update(delta));
 
@@ -120,11 +174,7 @@ export default function ModelRenderer({
   height = DEFAULT_SIZE,
 }: ModelViewerProps) {
   const modelRef = useRef<Group>(null);
-  const [ready, setReady] = useState(false);
-
-  useEffect(() => {
-    if (modelRef.current) setReady(true);
-  }, [modelRef.current]);
+  //
 
   return (
     <div style={{ width: width, height: height }}>
