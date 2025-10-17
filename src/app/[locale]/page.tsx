@@ -8,6 +8,7 @@ import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button
 import { TechStackCloud } from "@/components/pages/landing-page/tech-stack-cloud";
 import { useRouter } from "next/navigation";
 import ModelRenderer from "@/components/pages/landing-page/model-renderer";
+import { Button } from "@/components/ui/button";
 
 const HomePage = () => {
   const router = useRouter();
@@ -42,15 +43,25 @@ const HomePage = () => {
             <p className="w-[600px] text-base font-light">
               {t.rich("heroSubtitle", { br: () => <br /> })}
             </p>
-            <InteractiveHoverButton
-              className="w-fit mt-6"
-              onClick={() => router.push("/contact")}
-            >
-              {tButton("contact-me")}
-            </InteractiveHoverButton>
+            <div className="space-x-4 mt-6">
+              <Button
+                onClick={() => router.push("/projects")}
+                className="w-fit h-[42px] p-2 px-6 text-center text-base font-semibold hover:bg-primary/80 border border-text/10 transition-colors"
+              >
+                {tButton("projects")}
+              </Button>
+
+              <InteractiveHoverButton
+                className="w-fit"
+                onClick={() => router.push("/contact")}
+              >
+                {tButton("contact-me")}
+              </InteractiveHoverButton>
+            </div>
           </div>
 
-          <div className="size-[500px] border">
+          <div className="relative size-[500px]">
+            <div className="absolute top-1/2 left-1/2 -translate-1/2 w-[100px] h-[300px] bg-primary blur-[128px]"></div>
             <ModelRenderer />
           </div>
         </div>

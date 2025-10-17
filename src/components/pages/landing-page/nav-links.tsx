@@ -6,12 +6,18 @@ import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { useId } from "react";
 
-const NavLinks = ({ links }: { links: { href: string; label: string }[] }) => {
+const NavLinks = ({
+  links,
+  className,
+}: {
+  links: { href: string; label: string }[];
+  className?: string;
+}) => {
   const pathname = usePathname();
   const id = useId();
 
   return (
-    <div className="relative flex gap-8">
+    <div className={cn("relative flex gap-8", className)}>
       {links.map(({ href, label }) => {
         const isActive =
           href === "/"

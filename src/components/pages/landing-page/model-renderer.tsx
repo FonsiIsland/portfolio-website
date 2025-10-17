@@ -1,20 +1,8 @@
 "use client";
 
-// ModelViewer.tsx
-import React, {
-  Suspense,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { Suspense, useCallback, useEffect, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import {
-  Environment,
-  OrbitControls,
-  TransformControls,
-  useGLTF,
-} from "@react-three/drei";
+import { Environment, OrbitControls, useGLTF } from "@react-three/drei";
 import {
   AnimationAction,
   AnimationClip,
@@ -22,7 +10,7 @@ import {
   Group,
   LoopOnce,
 } from "three";
-import { gt } from "zod";
+import { a, useSpring } from "@react-spring/three";
 
 // Typisierung für das Ergebnis von useGLTF, falls du auf Nodes / Materials zugreifen willst
 type GLTFResult = {
@@ -34,6 +22,11 @@ type GLTFResult = {
 
 interface ModelProps {
   url: string;
+}
+
+interface AnimProps {
+  scale: number;
+  rotation: [number, number, number];
 }
 
 const Model = React.forwardRef<Group, ModelProps>(({ url }, ref) => {
@@ -80,7 +73,8 @@ const Model = React.forwardRef<Group, ModelProps>(({ url }, ref) => {
 
       const idleClip = AnimationClip.findByName(
         gltf.animations,
-        "New-Idle-Animation"
+        // "New-Idle-Animation"
+        "New-LookingAround-Mixamo-Animation"
       );
       if (idleClip) {
         idleAction.current = mixer.current.clipAction(idleClip);
@@ -133,8 +127,8 @@ const Model = React.forwardRef<Group, ModelProps>(({ url }, ref) => {
 
       mixer.current.addEventListener("finished", onFinished);
 
-      // Start mit Idle
-      playIdle();
+      // Start mit Waving
+      playWave();
 
       return () => {
         mixer.current?.removeEventListener("finished", onFinished);
@@ -145,19 +139,25 @@ const Model = React.forwardRef<Group, ModelProps>(({ url }, ref) => {
 
   useFrame((_, delta) => mixer.current?.update(delta));
 
-  gltf.scene.rotation.set(
-    0.1779506151620011,
-    -0.39958057398753655,
-    0.012940429542385008
-  );
-  gltf.scene.position.set(0, -0.9, 0);
+  // Eintrittsanimation mit react-spring
+  const { scale, rotation } = useSpring<AnimProps>({
+    from: { scale: 0, rotation: [0.3, -0.8, 0] },
+    to: { scale: 1, rotation: [0.17795, -0.39958, 0.01294] },
+    config: { mass: 1, tension: 60, friction: 18 },
+  });
 
+  gltf.scene.position.set(0, -0.9, 0);
   gltf.scene.traverse((child) => {
     child.castShadow = true;
     child.receiveShadow = true;
   });
 
-  return <primitive ref={ref} object={gltf.scene} dispose={null} />;
+  return (
+    // @ts-expect-error
+    <a.group scale={scale} rotation={rotation}>
+      <primitive ref={ref} object={gltf.scene} dispose={null} />
+    </a.group>
+  );
 });
 
 interface ModelViewerProps {
@@ -202,11 +202,12 @@ export default function ModelRenderer({
           <Model ref={modelRef} url={modelUrl} />
           <Environment preset="city" background={false} />
         </Suspense>
-        <OrbitControls
+        {/* Debugging */}
+        {/* <OrbitControls
           enableRotate={false}
           enableZoom={false}
           enablePan={false}
-        />
+        /> */}
       </Canvas>
     </div>
   );

@@ -13,8 +13,15 @@ import { usePathname, useRouter } from "@/i18n/navigation";
 import { useParams } from "next/navigation";
 import { languages, Locale, routing } from "@/i18n/routing";
 import { DynamicIcon } from "@/components/utils/icons";
+import { ReactNode } from "react";
 
-const LanguageSwitcher = () => {
+const LanguageSwitcher = ({
+  triggerComp,
+  className,
+}: {
+  triggerComp: ReactNode;
+  className?: string;
+}) => {
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
@@ -48,15 +55,10 @@ const LanguageSwitcher = () => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <div className="hover:text-text size-6 transition-colors">
-          <Languages />
-          <span className="sr-only">Switch Language</span>
-        </div>
-      </DropdownMenuTrigger>
+      <DropdownMenuTrigger asChild>{triggerComp}</DropdownMenuTrigger>
       <DropdownMenuContent
         align="end"
-        className="flex flex-col gap-1 border-text/10"
+        className={cn("flex flex-col gap-1 border-text/10", className)}
       >
         {createSelectItems()}
       </DropdownMenuContent>

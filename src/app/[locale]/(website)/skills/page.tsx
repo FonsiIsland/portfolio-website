@@ -15,9 +15,11 @@ import { DoodleArrowIcon } from "@/components/pages/skills-page/doodle-arrow-ico
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { useTranslations } from "next-intl";
+import cardVariants from "@/lib/constants";
 
 const AppsPage = () => {
   const t = useTranslations("pages.skillsPage");
+  const tCard = useTranslations("components.card");
 
   const containerVariants: Variants = {
     hidden: {},
@@ -26,11 +28,6 @@ const AppsPage = () => {
         staggerChildren: 0.2,
       },
     },
-  };
-
-  const cardVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
   };
 
   const cardKeysLeft = ["card-0", "card-1", "card-2"];
@@ -63,7 +60,7 @@ const AppsPage = () => {
                       href="/projects"
                       className="absolute bottom-2 right-3 h-6 transition-colors flex flex-row gap-1 items-center text-text/60 hover:text-accent"
                     >
-                      <p className="text-sm">Mehr</p>
+                      <p className="text-sm">{tCard("more")}</p>
                       <ArrowRight size={16} />
                     </Link>
                   )}
@@ -89,7 +86,7 @@ const AppsPage = () => {
                       href="/projects"
                       className="absolute bottom-2 right-3 h-6 transition-colors flex flex-row gap-1 items-center text-text/60 hover:text-accent"
                     >
-                      <p className="text-sm">Mehr</p>
+                      <p className="text-sm">{tCard("more")}</p>
                       <ArrowRight size={16} />
                     </Link>
                   )}

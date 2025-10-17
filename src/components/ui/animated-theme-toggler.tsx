@@ -10,11 +10,13 @@ import { useTheme } from "next-themes";
 interface AnimatedThemeTogglerProps
   extends React.ComponentPropsWithoutRef<"button"> {
   duration?: number;
+  iconStyle?: string;
 }
 
 export const AnimatedThemeToggler = ({
   className,
   duration = 400,
+  iconStyle,
   ...props
 }: AnimatedThemeTogglerProps) => {
   const { resolvedTheme, setTheme } = useTheme();
@@ -85,7 +87,7 @@ export const AnimatedThemeToggler = ({
       className={cn(className)}
       {...props}
     >
-      {isDark ? <Sun /> : <Moon />}
+      {isDark ? <Sun className={iconStyle} /> : <Moon className={iconStyle} />}
       <span className="sr-only">Toggle theme</span>
     </button>
   );

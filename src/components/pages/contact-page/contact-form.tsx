@@ -26,6 +26,8 @@ import { formSchema } from "@/schemas/schemas";
 import { send } from "@/actions/email";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
+import GlowCard from "../skills-page/glow-card";
+import cardVariants from "@/lib/constants";
 
 const ContactForm = () => {
   const t = useTranslations("pages.contactPage");
@@ -60,7 +62,7 @@ const ContactForm = () => {
   };
 
   return (
-    <Card className="w-full rounded-4xl">
+    <GlowCard variants={cardVariants} className="w-full" rounded="rounded-4xl">
       <CardHeader>
         <CardTitle className="text-2xl">{t("form.title")}</CardTitle>
         <CardDescription>{t("form.description")}</CardDescription>
@@ -168,7 +170,7 @@ const ContactForm = () => {
           </Button>
         </Field>
       </CardFooter>
-    </Card>
+    </GlowCard>
   );
 };
 

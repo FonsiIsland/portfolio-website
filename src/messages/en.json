@@ -53,6 +53,10 @@
       "navProjects": "Projects",
       "navContact": "Contact",
       "navNews": "News"
+    },
+    "card": {
+      "more": "More",
+      "read-more": "Read more"
     }
   },
   "labels": {
@@ -61,6 +65,7 @@
       "cancel": "Cancel",
       "reset": "Reset",
       "contact-me": "Contact me",
+      "projects": "Projects",
       "loading": "Loading ..."
     },
     "field": {
