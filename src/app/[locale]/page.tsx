@@ -7,6 +7,7 @@ import { TypingAnimation } from "@/components/ui/typing-animation";
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 import { TechStackCloud } from "@/components/pages/landing-page/tech-stack-cloud";
 import { useRouter } from "next/navigation";
+import ModelRenderer from "@/components/pages/landing-page/model-renderer";
 
 const HomePage = () => {
   const router = useRouter();
@@ -50,7 +51,7 @@ const HomePage = () => {
           </div>
 
           <div className="size-[500px] border">
-            <TechStackCloud />
+            <ModelRenderer />
           </div>
         </div>
       </div>
