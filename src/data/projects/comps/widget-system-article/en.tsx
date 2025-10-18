@@ -17,9 +17,9 @@ const WidgetSystemArticle = () => {
       <h2>A modular, interactive widget framework in React</h2>
       <p>
         The <strong>React Widget System</strong> is a flexible and animated
-        dashboard framework I'm currently developing as part of another project.
-        The goal is to create a reusable system that allows building custom user
-        interfaces from freely placeable, interactive widgets.
+        dashboard framework I&apos;m currently developing as part of another
+        project. The goal is to create a reusable system that allows building
+        custom user interfaces from freely placeable, interactive widgets.
       </p>
       <p>
         Once the system is mature enough, it will be released as a standalone{" "}

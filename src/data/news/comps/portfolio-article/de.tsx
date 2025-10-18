@@ -1,5 +1,4 @@
 import ArticleEntry from "@/components/utils/article-entry";
-import { Github, MessageCircleMore } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 

@@ -7,7 +7,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import { Languages } from "lucide-react";
 import { useLocale } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { useParams } from "next/navigation";
@@ -43,7 +42,7 @@ const LanguageSwitcher = ({
     ));
   };
 
-  const onSelectChange = (nextLocale: any) => {
+  const onSelectChange = (nextLocale: string) => {
     router.replace(
       // @ts-expect-error -- TypeScript will validate that only known `params`
       // are used in combination with a given `pathname`. Since the two will

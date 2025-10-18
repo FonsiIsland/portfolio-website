@@ -1,5 +1,4 @@
 import ArticleEntry from "@/components/utils/article-entry";
-import { Github, MessageCircleMore } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
@@ -12,8 +11,8 @@ const PortfolioArticle = () => {
 
       <p>
         After intensive work, my new portfolio website is finally online! On the
-        site, you'll find an overview of my current projects, past work, and
-        creative solutions.
+        site, you&apos;ll find an overview of my current projects, past work,
+        and creative solutions.
       </p>
 
       <p>

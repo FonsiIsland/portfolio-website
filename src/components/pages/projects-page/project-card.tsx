@@ -8,23 +8,11 @@ import {
 } from "@/components/ui/card";
 import React from "react";
 import GlowCard from "../skills-page/glow-card";
-import {
-  ArrowRight,
-  CalendarDaysIcon,
-  Code2,
-  Github,
-  Languages,
-  LucideIcon,
-  Moon,
-  Rocket,
-  Smartphone,
-} from "lucide-react";
+import { ArrowRight, CalendarDaysIcon } from "lucide-react";
 
 import Image from "next/image";
 import cardVariants from "@/lib/constants";
 import { useTranslations } from "next-intl";
-import { Badge } from "@/components/ui/badge";
-import DynamicLucideIcon from "@/components/utils/lucide-icon";
 import { BadgeName, BadgeRenderer } from "./project-badges";
 import { safeT } from "@/components/utils/safe-translation";
 
@@ -57,7 +45,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           <Image
             src={imageUrl}
             alt={safeT(t, titleKey)}
-            fill
+            width={830}
+            height={256}
             className="object-cover"
           />
         </div>

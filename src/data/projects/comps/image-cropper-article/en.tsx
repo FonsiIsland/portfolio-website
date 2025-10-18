@@ -12,8 +12,9 @@ const ImageCropperArticle = () => {
       <p>
         The <strong>Image Cropper</strong> is a simple web-based tool that
         allows users to quickly and easily crop their images. The project
-        originated from a colleague's need for a straightforward yet flexible
-        tool that requires no installation and gets the job done effortlessly.
+        originated from a colleague&apos;s need for a straightforward yet
+        flexible tool that requires no installation and gets the job done
+        effortlessly.
       </p>
       <p>
         The tool supports various masks that can be changed in the sidebar on

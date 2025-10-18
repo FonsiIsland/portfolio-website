@@ -10,8 +10,8 @@ const ElectronNodejsSmarthomeArticle = () => {
 
       <h2>A flexible, automated, and expandable smart home ecosystem</h2>
       <p>
-        The <strong>SmartHome System</strong> is currently in development. It's
-        designed to become a central ecosystem for home automation -
+        The <strong>SmartHome System</strong> is currently in development.
+        It&apos;s designed to become a central ecosystem for home automation -
         controlling, monitoring, and connecting devices such as lamps, sockets,
         sensors, and panels.
       </p>

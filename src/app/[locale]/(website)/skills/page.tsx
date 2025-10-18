@@ -3,10 +3,8 @@
 import { TechStackCloud } from "@/components/pages/landing-page/tech-stack-cloud";
 import GlowCard from "@/components/pages/skills-page/glow-card";
 import {
-  Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -16,6 +14,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 import cardVariants from "@/lib/constants";
+import { safeT } from "@/components/utils/safe-translation";
 
 const AppsPage = () => {
   const t = useTranslations("pages.skillsPage");
@@ -50,11 +49,12 @@ const AppsPage = () => {
                 className={`w-sm h-36 ${index % 2 === 0 ? "ml-auto" : "mr-auto"}`}
               >
                 <CardHeader>
-                  <CardTitle>{t(`${key}.title`)}</CardTitle>
-                  <CardDescription>{t(`${key}.description`)}</CardDescription>
+                  <CardTitle>{safeT(t, `${key}.title`)}</CardTitle>
+                  <CardDescription>
+                    {safeT(t, `${key}.description`)}
+                  </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  {/* Beispiel: Nur für die Projekte-Card einen Link */}
                   {key === "card-1" && (
                     <Link
                       href="/projects"
@@ -76,11 +76,12 @@ const AppsPage = () => {
                 className={`w-sm h-36 ${index % 2 === 0 ? "mr-auto" : "ml-auto"}`}
               >
                 <CardHeader>
-                  <CardTitle>{t(`${key}.title`)}</CardTitle>
-                  <CardDescription>{t(`${key}.description`)}</CardDescription>
+                  <CardTitle>{safeT(t, `${key}.title`)}</CardTitle>
+                  <CardDescription>
+                    {safeT(t, `${key}.description`)}
+                  </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  {/* Beispiel: Nur für die Projekte-Card einen Link */}
                   {key === "card-1" && (
                     <Link
                       href="/projects"

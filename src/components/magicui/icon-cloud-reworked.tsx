@@ -34,8 +34,7 @@ export const IconCloudReworked = forwardRef(function IconCloudReworked(
 ) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [iconPositions, setIconPositions] = useState<Icon[]>([]);
-  const [isDragging, setIsDragging] = useState(false);
-  const [lastMousePos, setLastMousePos] = useState({ x: 0, y: 0 });
+  const [isDragging] = useState(false);
   const [targetRotation, setTargetRotation] = useState<{
     x: number;
     y: number;
@@ -56,7 +55,7 @@ export const IconCloudReworked = forwardRef(function IconCloudReworked(
   const BASE_ICON_SIZE = 60;
   const resolution =
     typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1;
-  const ICON_SIZE = BASE_ICON_SIZE * resolution;
+  // const ICON_SIZE = BASE_ICON_SIZE * resolution;
   const RADIUS = 100 * sizeScale; // 🔹 Sphärenradius skalierbar
   const CANVAS_BASE_SIZE = 400 * sizeScale; // 🔹 Canvasgröße
 
@@ -192,35 +191,35 @@ export const IconCloudReworked = forwardRef(function IconCloudReworked(
   }, [icons, images, RADIUS]);
 
   // --- Maussteuerung ---
-  const handleMouseDown = (e: React.MouseEvent<HTMLCanvasElement>) => {
-    setIsDragging(true);
-    const rect = e.currentTarget.getBoundingClientRect();
-    setLastMousePos({ x: e.clientX, y: e.clientY });
-    setTargetRotation(null); // Stoppe sanfte Rotation
-    velocityRef.current = { x: 0, y: 0 };
-  };
+  // const handleMouseDown = (e: React.MouseEvent<HTMLCanvasElement>) => {
+  //   setIsDragging(true);
+  //   const rect = e.currentTarget.getBoundingClientRect();
+  //   setLastMousePos({ x: e.clientX, y: e.clientY });
+  //   setTargetRotation(null); // Stoppe sanfte Rotation
+  //   velocityRef.current = { x: 0, y: 0 };
+  // };
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
-    if (isDragging) {
-      const deltaX = e.clientX - lastMousePos.x;
-      const deltaY = e.clientY - lastMousePos.y;
+  // const handleMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
+  //   if (isDragging) {
+  //     const deltaX = e.clientX - lastMousePos.x;
+  //     const deltaY = e.clientY - lastMousePos.y;
 
-      const rotationSpeed = 0.005;
+  //     const rotationSpeed = 0.005;
 
-      rotationRef.current = {
-        x: rotationRef.current.x - deltaY * rotationSpeed,
-        y: rotationRef.current.y - deltaX * rotationSpeed,
-      };
+  //     rotationRef.current = {
+  //       x: rotationRef.current.x - deltaY * rotationSpeed,
+  //       y: rotationRef.current.y - deltaX * rotationSpeed,
+  //     };
 
-      velocityRef.current = {
-        x: -deltaX * rotationSpeed,
-        y: -deltaY * rotationSpeed,
-      };
-      setLastMousePos({ x: e.clientX, y: e.clientY });
-    }
-  };
+  //     velocityRef.current = {
+  //       x: -deltaX * rotationSpeed,
+  //       y: -deltaY * rotationSpeed,
+  //     };
+  //     setLastMousePos({ x: e.clientX, y: e.clientY });
+  //   }
+  // };
 
-  const handleMouseUp = () => setIsDragging(false);
+  // const handleMouseUp = () => setIsDragging(false);
 
   // --- Animation ---
   useEffect(() => {
@@ -270,7 +269,7 @@ export const IconCloudReworked = forwardRef(function IconCloudReworked(
       });
 
       // Icons rendern
-      sortedIcons.forEach((icon, i) => {
+      sortedIcons.forEach((icon) => {
         const cosX = Math.cos(rotationRef.current.x);
         const sinX = Math.sin(rotationRef.current.x);
         const cosY = Math.cos(rotationRef.current.y);

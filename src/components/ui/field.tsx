@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { useTranslations } from "next-intl";
+import { safeT } from "../utils/safe-translation";
 
 function FieldSet({ className, ...props }: React.ComponentProps<"fieldset">) {
   return (
@@ -204,18 +205,18 @@ function FieldError({
     }
 
     if (errors?.length == 1) {
-      return t(errors[0]?.message);
+      return safeT(t, errors[0]?.message || "");
     }
 
     return (
       <ul className="ml-4 flex list-disc flex-col gap-1">
         {errors.map(
           (error, index) =>
-            error?.message && <li key={index}>{t(error.message)}</li>
+            error?.message && <li key={index}>{safeT(t, error.message)}</li>
         )}
       </ul>
     );
-  }, [children, errors]);
+  }, [children, errors, t]);
 
   if (!content) {
     return null;

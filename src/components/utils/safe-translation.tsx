@@ -1,6 +1,6 @@
-export const safeT = (t: any, key: string) => {
+export const safeT = (t: unknown, key: string) => {
   try {
-    return t(key);
+    return (t as (k: string) => string)(key);
   } catch {
     return key; // Fallback
   }

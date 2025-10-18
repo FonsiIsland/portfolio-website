@@ -3,11 +3,12 @@
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import React from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import NewsCard from "./news-card";
 import { useTranslations } from "next-intl";
 import { safeT } from "@/components/utils/safe-translation";
+import { VisuallyHidden } from "radix-ui";
+import { DialogDescription, DialogTitle } from "@radix-ui/react-dialog";
 
 interface NewsDialogProps {
   titleKey: string;
@@ -51,6 +52,11 @@ const NewsDialog: React.FC<NewsDialogProps> = ({
           </div>
           <section className="blog-news">{article}</section>
         </ScrollArea>
+
+        <VisuallyHidden.Root>
+          <DialogTitle>News Dialog</DialogTitle>
+          <DialogDescription>News Dialog</DialogDescription>
+        </VisuallyHidden.Root>
       </DialogContent>
     </Dialog>
   );

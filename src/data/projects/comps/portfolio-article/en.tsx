@@ -32,7 +32,7 @@ const PortfolioArticle = () => {
         To keep the UI clean and modern, I use well-known component libraries
         like <strong>shadcn/ui</strong> and <strong>MagicUI</strong>. These
         allow implementing reusable elements that are both functional and
-        visually appealing without affecting the site's performance.
+        visually appealing without affecting the site&apos;s performance.
       </p>
 
       <h3>Design, Interactivity & User Experience</h3>

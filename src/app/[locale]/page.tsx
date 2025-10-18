@@ -2,10 +2,8 @@
 
 import { useTranslations } from "next-intl";
 import { AuroraText } from "@/components/magicui/aurora-text";
-import { useEffect } from "react";
 import { TypingAnimation } from "@/components/ui/typing-animation";
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
-import { TechStackCloud } from "@/components/pages/landing-page/tech-stack-cloud";
 import { useRouter } from "next/navigation";
 import ModelRenderer from "@/components/pages/landing-page/model-renderer";
 import { Button } from "@/components/ui/button";
@@ -27,9 +25,9 @@ const HomePage = () => {
               <TypingAnimation
                 words={[
                   "Fullstack Dev ⚡",
-                  "Web Dev 🎨", // klassischer Entwickler-Look
-                  "Api Designer 🔌", // Stecker für API-Verbindungen
-                  "Backend Dev 🧩", // Puzzle für Backend-Logik
+                  "Web Dev 🎨",
+                  "Api Designer 🔌",
+                  "Backend Dev 🧩",
                 ]}
                 loop
                 className="text-7xl font-bold"

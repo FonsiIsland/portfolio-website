@@ -42,7 +42,8 @@ const NewsCard: React.FC<NewsCardProps> = ({
           <Image
             src={imageUrl}
             alt={safeT(t, titleKey)}
-            fill
+            width={830}
+            height={256}
             className="object-cover"
           />
         </div>

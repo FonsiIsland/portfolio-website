@@ -6,13 +6,7 @@ import {
   useTransform,
   Variants,
 } from "framer-motion";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 
 interface GlowCardProps {
   /** Animation Variants von Framer */
@@ -102,7 +96,6 @@ export default function GlowCard({
       />
 
       {/* Content */}
-
       <Card className={`w-full h-full ${rounded}`}>{children}</Card>
     </motion.div>
   );

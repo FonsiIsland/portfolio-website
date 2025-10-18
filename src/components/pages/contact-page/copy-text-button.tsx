@@ -7,7 +7,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Button } from "@/components/ui/button";
 
 export default function CopyTextButton({ text }: { text: string }) {
   const [isCopied, setIsCopied] = useState(false);

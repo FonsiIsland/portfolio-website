@@ -15,7 +15,7 @@ const ElectronPluginSystemArticle = () => {
         The <strong>Electron Plugin System</strong> is a framework I developed
         to extend Electron applications modularly. It allows downloading,
         verifying, installing, and seamlessly integrating plugins from a
-        marketplace into the app's frontend.
+        marketplace into the app&apos;s frontend.
       </p>
       <p>
         The goal is a reusable, secure, and scalable system that standardizes

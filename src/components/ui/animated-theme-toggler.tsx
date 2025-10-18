@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useRef } from "react";
 import { Moon, Sun } from "lucide-react";
 import { flushSync } from "react-dom";
 
@@ -78,7 +78,7 @@ export const AnimatedThemeToggler = ({
         pseudoElement: "::view-transition-new(root)",
       }
     );
-  }, [isDark, duration]);
+  }, [isDark, duration, setTheme]);
 
   return (
     <button

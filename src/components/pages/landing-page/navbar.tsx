@@ -2,14 +2,13 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Bell, Clock, Github, Languages, Menu, Sun } from "lucide-react";
+import { Github, Languages, Menu } from "lucide-react";
 import NavLinks from "@/components/pages/landing-page/nav-links";
 import LanguageSwitcher from "@/components/languages/language-switcher";
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
 import { useTranslations } from "next-intl";
 import {
   Sheet,
-  SheetClose,
   SheetContent,
   SheetDescription,
   SheetHeader,
@@ -44,11 +43,9 @@ const Navbar = () => {
           </p>
         </Link>
       </div>
-
       <div className="flex-1 flex justify-center max-lg:hidden">
         <NavLinks links={pageLinks} />
       </div>
-
       <div className="flex-1 flex flex-row gap-8 justify-end max-lg:hidden">
         <div className="hover:text-text size-6 transition-colors">
           <Link
@@ -60,7 +57,6 @@ const Navbar = () => {
             <span className="sr-only">Github Link</span>
           </Link>
         </div>
-
         <LanguageSwitcher
           triggerComp={
             <div className="hover:text-text size-6 transition-colors">
@@ -69,14 +65,8 @@ const Navbar = () => {
             </div>
           }
         />
-
         <AnimatedThemeToggler className="hover:text-text size-6 transition-colors" />
-
-        {/* <ThemeToggler /> */}
-
-        {/* <NavLinks links={authLinks} /> */}
       </div>
-
       <div className="lg:hidden">
         <div className="hover:text-text size-6 transition-colors">
           <Sheet>
@@ -102,7 +92,6 @@ const Navbar = () => {
                         <span className="sr-only">Github Link</span>
                       </Link>
                     </div>
-
                     <LanguageSwitcher
                       triggerComp={
                         <div className="hover:text-text size-5 transition-colors">
@@ -111,7 +100,6 @@ const Navbar = () => {
                         </div>
                       }
                     />
-
                     <AnimatedThemeToggler
                       className="hover:text-text size-5 transition-colors"
                       iconStyle="size-5"

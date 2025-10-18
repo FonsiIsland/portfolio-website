@@ -1,6 +1,7 @@
 "use client";
 
 import React, {
+  forwardRef,
   Suspense,
   useCallback,
   useEffect,
@@ -8,21 +9,21 @@ import React, {
   useState,
 } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Environment, OrbitControls, useGLTF } from "@react-three/drei";
+import { Environment, useGLTF } from "@react-three/drei";
 import {
   AnimationAction,
   AnimationClip,
   AnimationMixer,
+  AnimationMixerEventMap,
   Group,
   LoopOnce,
 } from "three";
 import { a, useSpring } from "@react-spring/three";
 
-// Typisierung für das Ergebnis von useGLTF, falls du auf Nodes / Materials zugreifen willst
 type GLTFResult = {
   scene: Group;
-  nodes?: Record<string, any>;
-  materials?: Record<string, any>;
+  nodes?: Record<string, unknown>;
+  materials?: Record<string, unknown>;
   animations: AnimationClip[];
 };
 
@@ -37,7 +38,7 @@ interface AnimProps {
 
 useGLTF.preload("/3dmodels/SecondChar.glb");
 
-const Model = React.forwardRef<Group, ModelProps>(({ url }, ref) => {
+const Model = forwardRef<Group, ModelProps>(({ url }, ref) => {
   const gltf = useGLTF(url) as GLTFResult;
   const mixer = useRef<AnimationMixer | null>(null);
   const idleAction = useRef<AnimationAction | null>(null);
@@ -52,25 +53,18 @@ const Model = React.forwardRef<Group, ModelProps>(({ url }, ref) => {
     (targetAction: AnimationAction, duration = 0.5) => {
       if (!mixer.current || !targetAction) return;
 
-      const currentAction = currentActionRef.current; // Lese den aktuellen Action-Zustand über Ref
+      const currentAction = currentActionRef.current;
 
       if (targetAction === currentAction) {
-        // Wenn die Ziel-Action bereits läuft, tue nichts
         return;
       }
 
       if (currentAction) {
-        // Führt den Cross-Fade von der aktuellen zur Ziel-Action durch
-        currentAction
-          // 'true' stoppt die ausgehende Action am Ende des Fades.
-          .crossFadeTo(targetAction, duration, true)
-          .play();
+        currentAction.crossFadeTo(targetAction, duration, true).play();
       } else {
-        // Initialer Start ohne Fade
         targetAction.reset().play();
       }
 
-      // Setze die neue Action als aktuell im Ref
       currentActionRef.current = targetAction;
     },
     []
@@ -134,7 +128,7 @@ const Model = React.forwardRef<Group, ModelProps>(({ url }, ref) => {
         }
       };
 
-      const onFinished = (e: any) => {
+      const onFinished = (e: AnimationMixerEventMap["finished"]) => {
         console.log("finito", e.action);
         const action = e.action;
 
@@ -182,12 +176,14 @@ const Model = React.forwardRef<Group, ModelProps>(({ url }, ref) => {
   });
 
   return (
-    // @ts-expect-error
+    // @ts-expect-error Typescript has a problem with the type of the rotation when using useSpring
     <a.group scale={scale} rotation={rotation}>
       <primitive ref={ref} object={gltf.scene} dispose={null} />
     </a.group>
   );
 });
+
+Model.displayName = "3dModel";
 
 interface ModelViewerProps {
   modelUrl?: string;
@@ -211,7 +207,7 @@ export default function ModelRenderer({
       window.removeEventListener("beforeunload", alertUser);
     };
   }, []);
-  const alertUser = (e: any) => {
+  const alertUser = (e: BeforeUnloadEvent) => {
     e.returnValue = "";
     showCanvas(false);
   };

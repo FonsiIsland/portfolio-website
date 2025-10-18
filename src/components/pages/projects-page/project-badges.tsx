@@ -154,7 +154,6 @@ export const BadgeRenderer: React.FC<{
 }> = ({ badges }) => {
   const t = useTranslations("components.badge.label");
 
-  // Filtere nur die Badges, die für dieses Projekt relevant sind
   const projectBadges = badges
     .map((name) => ({ name, ...BadgeDefinitions[name] }))
     .filter(Boolean);

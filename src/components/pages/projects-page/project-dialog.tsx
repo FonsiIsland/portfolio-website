@@ -1,13 +1,20 @@
 "use client";
 
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import React from "react";
 import Image from "next/image";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import ProjectCard from "./project-card";
 import { BadgeName } from "./project-badges";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { safeT } from "@/components/utils/safe-translation";
+import { VisuallyHidden } from "radix-ui";
 
 interface ProjectDialogProps {
   titleKey: string;
@@ -54,6 +61,10 @@ const ProjectDialog: React.FC<ProjectDialogProps> = ({
           </div>
           <section className="blog-news">{article}</section>
         </ScrollArea>
+        <VisuallyHidden.Root>
+          <DialogTitle>News Dialog</DialogTitle>
+          <DialogDescription>News Dialog</DialogDescription>
+        </VisuallyHidden.Root>
       </DialogContent>
     </Dialog>
   );

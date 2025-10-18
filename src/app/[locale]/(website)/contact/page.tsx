@@ -1,6 +1,5 @@
 import ContactForm from "@/components/pages/contact-page/contact-form";
 import CopyTextButton from "@/components/pages/contact-page/copy-text-button";
-import { TechStackCloud } from "@/components/pages/landing-page/tech-stack-cloud";
 import { useTranslations } from "next-intl";
 
 const PricingPage = () => {
@@ -27,7 +26,5 @@ const PricingPage = () => {
       </div>
     </main>
   );
-
-  // Ich freue mich über spannende Projekte, Kooperationen oder einfach einen netten Austausch. Schreib mir gerne eine Nachricht – ich melde mich so schnell wie möglich!
 };
 export default PricingPage;
