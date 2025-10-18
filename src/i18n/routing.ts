@@ -6,11 +6,9 @@ export const languages = [
 ];
 
 export const routing = defineRouting({
-  // A list of all locales that are supported
   locales: languages.map(([code]) => code),
-
-  // Used when no locale matches
   defaultLocale: "en",
+  localeDetection: true,
 });
 
 export type Locale = (typeof routing.locales)[number];
