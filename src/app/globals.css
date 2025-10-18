@@ -376,7 +376,18 @@
   }
 
   section > p {
-    @apply font-light text-text/80 leading-relaxed mb-6;
+    @apply font-light text-text/80 leading-relaxed mb-4;
+  }
+
+  /* lists */
+  ul {
+    @apply list-disc font-light text-text/80 leading-relaxed mb-4;
+  }
+  ol {
+    @apply list-decimal font-light text-text/80 leading-relaxed mb-4;
+  }
+  li {
+    @apply mb-1 font-light text-text/80 leading-relaxed;
   }
 
   h1 {
@@ -396,6 +407,10 @@
   }
   h6 {
     @apply text-sm font-normal mb-0.5;
+  }
+
+  canvas {
+    @apply bg-transparent;
   }
 }
 

@@ -27,12 +27,42 @@
       },
       "card-5": {
         "title": "Fun / Extras",
-        "description": "Open source, small experiments, and gaming projects are part of my hobbies. I love trying out creative ideas and developing new things playfully."
+        "description": "Open source, small experiments, and gaming projects are part of my hobbies. I love trying out creative ideas and developing new things."
       }
     },
-    "projectsPage": {},
+    "projectsPage": {
+      "article": {
+        "news": {},
+        "project": {
+          "portfolio": {
+            "title": "Portfolio",
+            "description": "Check out my latest projects and work - the portfolio is now online!"
+          },
+          "react_widget_system": {
+            "title": "Widget System",
+            "description": "A flexible React widget system for easily creating, embedding, and managing interactive components."
+          },
+          "node_plugin_system": {
+            "title": "Node Plugin System",
+            "description": "A secure, modular plugin system for Node.js with digital signature validation, sandbox isolation, and runtime tamper detection."
+          },
+          "electron_plugin_system": {
+            "title": "Electron Plugin System",
+            "description": "A secure, modular plugin system for Electron apps featuring digital signature validation, sandbox isolation, runtime tamper detection, and IPC-based communication."
+          },
+          "smarthome_system": {
+            "title": "SmartHome System",
+            "description": "A modular, secure SmartHome ecosystem currently in active development. Uses the Electron Plugin System for the desktop app, the Node.js Plugin System for backend modules, socket communication, and an RBAC mTLS pairing system for authentication. Widgets enable customizable dashboards."
+          },
+          "image_cropper": {
+            "title": "Image Cropper",
+            "description": "A lightweight web-based tool for quickly cropping images with various masks and instant download."
+          }
+        }
+      }
+    },
     "contactPage": {
-      "title": "Let's get In Touch!",
+      "title": "Let's get in Touch!",
       "subtitle": "I'm excited about interesting projects, collaborations, or just a friendly exchange. Feel free to send me a message - I'll get back to you as soon as possible!",
       "manually": "Or just reach out manually to",
       "form": {
@@ -44,7 +74,16 @@
         "error": "An error occured while trying to send your message!"
       }
     },
-    "newsPage": {}
+    "newsPage": {
+      "article": {
+        "project": {
+          "portfolio": {
+            "title": "Portfolio Launch",
+            "description": "Check out my latest projects and works - my portfolio is now live!"
+          }
+        }
+      }
+    }
   },
   "components": {
     "navbar": {
@@ -57,6 +96,46 @@
     "card": {
       "more": "More",
       "read-more": "Read more"
+    },
+    "badge": {
+      "label": {
+        "published": "Published",
+        "in_development": "In Development",
+        "production_ready": "Production Ready",
+        "web_app_ready": "Web App Ready",
+        "deployed_vercel": "Deployed with Vercel",
+
+        "react_tailwind": "React + Tailwind CSS",
+        "typescript_ready": "TypeScript Ready",
+        "vanilla_js": "Vanilla JS",
+        "electron": "Electron",
+        "nodejs": "Node.js",
+
+        "responsive": "Responsive Design",
+        "dark_mode": "Dark Mode",
+        "multilingual": "Multilingual",
+        "drag_drop": "Drag & Drop",
+        "modular_components": "Modular Components",
+        "dynamic_grid_layout": "Dynamic Grid Layout",
+        "editor_mode": "Editor Mode",
+        "canvas_based": "Canvas-Based",
+        "image_cropping": "Image Cropping",
+        "framer_motion": "Framer Motion + Spring",
+        "open_source": "Open Source",
+        "closed_source": "Closed Source",
+
+        "security_first": "Security First",
+        "tamper_detection": "Tamper Detection",
+        "rbac_mtls": "RBAC + mTLS",
+        "digital_signatures": "Digital Signatures",
+
+        "smarthome": "SmartHome",
+        "sandboxed_vm": "Sandboxed VM",
+        "sandboxed_webviews": "Sandboxed Webviews",
+        "z_index_control": "Z-Index Control",
+        "dynamic_routing": "Dynamic Routing",
+        "ipc_communication": "IPC Communication"
+      }
     }
   },
   "labels": {

@@ -8,27 +8,42 @@ import {
 } from "@/components/ui/card";
 import React from "react";
 import GlowCard from "../skills-page/glow-card";
-import { ArrowRight, CalendarDaysIcon } from "lucide-react";
+import {
+  ArrowRight,
+  CalendarDaysIcon,
+  Code2,
+  Github,
+  Languages,
+  LucideIcon,
+  Moon,
+  Rocket,
+  Smartphone,
+} from "lucide-react";
 
 import Image from "next/image";
 import cardVariants from "@/lib/constants";
 import { useTranslations } from "next-intl";
+import { Badge } from "@/components/ui/badge";
+import DynamicLucideIcon from "@/components/utils/lucide-icon";
+import { BadgeName, BadgeRenderer } from "./project-badges";
 import { safeT } from "@/components/utils/safe-translation";
 
-interface NewsCardProps {
+interface ProjectCardProps {
   titleKey: string;
   descriptionKey: string;
   date: string;
   imageUrl: string;
+  badges: BadgeName[];
 }
 
-const NewsCard: React.FC<NewsCardProps> = ({
+const ProjectCard: React.FC<ProjectCardProps> = ({
   titleKey,
   descriptionKey,
   date,
   imageUrl,
+  badges,
 }) => {
-  const t = useTranslations("pages.newsPage.article.project");
+  const t = useTranslations("pages.projectsPage.article.project");
   const tCard = useTranslations("components.card");
 
   return (
@@ -64,9 +79,12 @@ const NewsCard: React.FC<NewsCardProps> = ({
         <CardDescription className="text-left">
           {safeT(t, descriptionKey)}
         </CardDescription>
+        <CardDescription>
+          <BadgeRenderer badges={badges} />
+        </CardDescription>
       </CardHeader>
     </GlowCard>
   );
 };
 
-export default NewsCard;
+export default ProjectCard;

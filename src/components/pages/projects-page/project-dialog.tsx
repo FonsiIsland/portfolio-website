@@ -3,37 +3,40 @@
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import React from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import NewsCard from "./news-card";
-import { useTranslations } from "next-intl";
+import ProjectCard from "./project-card";
+import { BadgeName } from "./project-badges";
+import { useLocale, useTranslations } from "next-intl";
 import { safeT } from "@/components/utils/safe-translation";
 
-interface NewsDialogProps {
+interface ProjectDialogProps {
   titleKey: string;
   descriptionKey: string;
   date: string;
   imageUrl: string;
   article: React.ReactNode;
+  badges: BadgeName[];
 }
 
-const NewsDialog: React.FC<NewsDialogProps> = ({
+const ProjectDialog: React.FC<ProjectDialogProps> = ({
   titleKey,
   descriptionKey,
   date,
   imageUrl,
   article,
+  badges,
 }) => {
-  const t = useTranslations("pages.newsPage.article.project");
+  const t = useTranslations("pages.projectsPage.article.project");
 
   return (
     <Dialog>
       <DialogTrigger>
-        <NewsCard
+        <ProjectCard
           titleKey={titleKey}
           descriptionKey={descriptionKey}
           date={date}
           imageUrl={imageUrl}
+          badges={badges}
         />
       </DialogTrigger>
       <DialogContent
@@ -56,4 +59,4 @@ const NewsDialog: React.FC<NewsDialogProps> = ({
   );
 };
 
-export default NewsDialog;
+export default ProjectDialog;

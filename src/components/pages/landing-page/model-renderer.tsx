@@ -1,6 +1,12 @@
 "use client";
 
-import React, { Suspense, useCallback, useEffect, useRef } from "react";
+import React, {
+  Suspense,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment, OrbitControls, useGLTF } from "@react-three/drei";
 import {
@@ -29,18 +35,21 @@ interface AnimProps {
   rotation: [number, number, number];
 }
 
+useGLTF.preload("/3dmodels/SecondChar.glb");
+
 const Model = React.forwardRef<Group, ModelProps>(({ url }, ref) => {
   const gltf = useGLTF(url) as GLTFResult;
   const mixer = useRef<AnimationMixer | null>(null);
   const idleAction = useRef<AnimationAction | null>(null);
   const waveAction = useRef<AnimationAction | null>(null);
+  const lookAroundAction = useRef<AnimationAction | null>(null);
   const currentActionRef = useRef<AnimationAction | null>(null);
 
   const idleCounter = useRef(0);
 
   // Cross-Fading Funktion
   const fadeToAction = useCallback(
-    (targetAction: AnimationAction, duration = 0.3) => {
+    (targetAction: AnimationAction, duration = 0.5) => {
       if (!mixer.current || !targetAction) return;
 
       const currentAction = currentActionRef.current; // Lese den aktuellen Action-Zustand über Ref
@@ -73,8 +82,7 @@ const Model = React.forwardRef<Group, ModelProps>(({ url }, ref) => {
 
       const idleClip = AnimationClip.findByName(
         gltf.animations,
-        // "New-Idle-Animation"
-        "New-LookingAround-Mixamo-Animation"
+        "New-Idle-Animation"
       );
       if (idleClip) {
         idleAction.current = mixer.current.clipAction(idleClip);
@@ -94,6 +102,17 @@ const Model = React.forwardRef<Group, ModelProps>(({ url }, ref) => {
         waveAction.current.enabled = true;
       }
 
+      const lookAroundClip = AnimationClip.findByName(
+        gltf.animations,
+        "New-LookingAround-Mixamo-Animation"
+      );
+      if (lookAroundClip) {
+        lookAroundAction.current = mixer.current.clipAction(lookAroundClip);
+        lookAroundAction.current.loop = LoopOnce;
+        lookAroundAction.current.clampWhenFinished = true;
+        lookAroundAction.current.enabled = true;
+      }
+
       const playIdle = () => {
         if (idleAction.current) {
           idleAction.current.reset(); // Stelle sicher, dass sie von vorne startet
@@ -108,19 +127,29 @@ const Model = React.forwardRef<Group, ModelProps>(({ url }, ref) => {
         }
       };
 
+      const playLookAround = () => {
+        if (lookAroundAction.current) {
+          lookAroundAction.current.reset(); // Auch hier immer vom Anfang
+          fadeToAction(lookAroundAction.current, 0.3);
+        }
+      };
+
       const onFinished = (e: any) => {
+        console.log("finito", e.action);
         const action = e.action;
 
         if (action === idleAction.current) {
           idleCounter.current++;
-          // Mit Wahrscheinlichkeit 20% Wave abspielen
           if (idleCounter.current >= 2 && Math.random() < 0.5) {
             idleCounter.current = 0;
-            playWave();
+
+            if (Math.random() < 0.5) {
+              playWave();
+            } else playLookAround();
           } else {
             playIdle();
           }
-        } else if (action === waveAction.current) {
+        } else {
           playIdle();
         }
       };
@@ -174,43 +203,65 @@ export default function ModelRenderer({
   height = DEFAULT_SIZE,
 }: ModelViewerProps) {
   const modelRef = useRef<Group>(null);
-  //
+  const [canvasVisible, showCanvas] = useState(true);
+
+  useEffect(() => {
+    window.addEventListener("beforeunload", alertUser);
+    return () => {
+      window.removeEventListener("beforeunload", alertUser);
+    };
+  }, []);
+  const alertUser = (e: any) => {
+    e.returnValue = "";
+    showCanvas(false);
+  };
 
   return (
-    <div style={{ width: width, height: height }}>
-      <Canvas
-        shadows
-        camera={{ position: [0, 0, 2], fov: 50 }}
-        style={{ background: "transparent" }}
-      >
-        {/* Lichter */}
-        <ambientLight intensity={0.2} color="#ffffff" />
-        <directionalLight
-          position={[2, 2, 3]} // vorne-links
-          intensity={0.3}
-          castShadow
-          shadow-mapSize-width={2048}
-          shadow-mapSize-height={2048}
-        />
-        <directionalLight
-          position={[1, 2, 2]} // vorne-rechts für Aufhellung
-          intensity={0.6}
-        />
-        <pointLight position={[-2, 1, 2]} intensity={0.4} />
+    <div
+      style={{ width: width, height: height, backgroundColor: "transparent" }}
+    >
+      {canvasVisible && (
+        <Canvas
+          shadows
+          camera={{ position: [0, 0, 2], fov: 50 }}
+          style={{ background: "transparent" }}
+          gl={{ alpha: true }}
+          onCreated={({ gl }) => {
+            gl.setClearColor(0x000000, 0);
+            const originalClear = gl.clear.bind(gl);
+            gl.clear = (...args) => {
+              gl.setClearColor(0x000000, 0);
+              originalClear(...args);
+            };
+          }}
+        >
+          {/* Lichter */}
+          <ambientLight intensity={0.2} color="#ffffff" />
+          <directionalLight
+            position={[2, 2, 3]} // vorne-links
+            intensity={0.3}
+            castShadow
+            shadow-mapSize-width={2048}
+            shadow-mapSize-height={2048}
+          />
+          <directionalLight
+            position={[1, 2, 2]} // vorne-rechts für Aufhellung
+            intensity={0.6}
+          />
+          <pointLight position={[-2, 1, 2]} intensity={0.4} />
 
-        <Suspense fallback={null}>
-          <Model ref={modelRef} url={modelUrl} />
-          <Environment preset="city" background={false} />
-        </Suspense>
-        {/* Debugging */}
-        {/* <OrbitControls
+          <Suspense fallback={null}>
+            <Model ref={modelRef} url={modelUrl} />
+            <Environment preset="city" background={false} />
+          </Suspense>
+          {/* Debugging */}
+          {/* <OrbitControls
           enableRotate={false}
           enableZoom={false}
           enablePan={false}
         /> */}
-      </Canvas>
+        </Canvas>
+      )}
     </div>
   );
 }
-
-useGLTF.preload("/3dmodels/SecondChar.glb");

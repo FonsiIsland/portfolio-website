@@ -9,6 +9,7 @@ import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
 import { useTranslations } from "next-intl";
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetDescription,
   SheetHeader,
@@ -35,7 +36,7 @@ const Navbar = () => {
   if (!mounted) return null;
 
   return (
-    <header className="mx-auto sm:max-w-sm md:max-w-md lg:max-w-7xl px-5 xl:px-0 absolute top-0 left-0 right-0 h-[80px] flex flex-row justify-between items-center z-50 text-text/60 text-[16px]">
+    <header className="mx-auto md:max-w-full lg:max-w-7xl px-5 xl:px-0 absolute top-0 left-0 right-0 h-[80px] flex flex-row justify-between items-center z-50 text-text/60 text-[16px]">
       <div className="flex-1 flex justify-start">
         <Link href="/">
           <p className="text-text text-2xl md:text-4xl lg:text-5xl font-jersey10">
@@ -120,6 +121,7 @@ const Navbar = () => {
                 <SheetDescription>
                   <div className="flex justify-center pt-8">
                     <NavLinks
+                      sheetCloseWrapper
                       links={pageLinks}
                       className="flex-col gap-8 text-center text-xl w-[200px]"
                     />

@@ -27,13 +27,42 @@
       },
       "card-5": {
         "title": "Fun / Extras",
-        "description": "Open Source, kleine Experimente und Gaming-Projekte gehören zu meinen Hobbys. Liebe es, kreative Ideen auszuprobieren und spielerisch Neues zu entwickeln."
+        "description": "Open Source, kleine Experimente und Gaming-Projekte gehören zu meinen Hobbys. Liebe es, kreative Ideen auszuprobieren und neues zu entwickeln."
       }
     },
-    "projectsPage": {},
+    "projectsPage": {
+      "article": {
+        "project": {
+          "portfolio": {
+            "title": "Portfolio",
+            "description": "Schau dir meine neuesten Projekte und Arbeiten an - das Portfolio ist jetzt online!"
+          },
+          "react_widget_system": {
+            "title": "Widget System",
+            "description": "Ein flexibles React-Widget-System zum einfachen Erstellen, Einbinden und Verwalten interaktiver Komponenten."
+          },
+          "node_plugin_system": {
+            "title": "Node Plugin System",
+            "description": "Ein sicheres, modular aufgebautes Plugin-System für Node.js mit digitaler Signaturprüfung, Sandbox-Isolation und Laufzeit-Tampering-Erkennung."
+          },
+          "electron_plugin_system": {
+            "title": "Electron Plugin System",
+            "description": "Ein sicheres, modulares Plugin-System für Electron-Apps mit digitaler Signaturprüfung, Sandbox-Isolation, Laufzeit-Tampering-Erkennung und IPC-basierter Kommunikation."
+          },
+          "smarthome_system": {
+            "title": "SmartHome System",
+            "description": "Ein modular aufgebautes, sicheres Smarthome-Ökosystem in aktiver Entwicklung. Nutzt das Electron Plugin System für die Desktop-App, das Node.js Plugin System für Backend-Module, Socket-Kommunikation sowie ein RBAC-mTLS-Pairing-System für Authentifizierung. Widgets ermöglichen anpassbare Dashboards."
+          },
+          "image_cropper": {
+            "title": "Image Cropper",
+            "description": "Ein leichtes, webbasiertes Tool zum schnellen Zuschneiden von Bildern mit verschiedenen Masken und direktem Download."
+          }
+        }
+      }
+    },
     "contactPage": {
       "title": "Kontakt aufnehmen!",
-      "subtitle": "Ich freue mich über interessante Projekte, Kooperationen oder einfach einen freundlichen Austausch. Schreib mir gerne eine Nachricht – ich melde mich so schnell wie möglich zurück!",
+      "subtitle": "Ich freue mich über interessante Projekte, Kooperationen oder einfach einen freundlichen Austausch. Schreib mir gerne eine Nachricht - ich melde mich so schnell wie möglich zurück!",
       "manually": "Oder kontaktiere mich einfach direkt unter",
       "form": {
         "title": "Kontaktiere mich",
@@ -44,7 +73,16 @@
         "error": "Es ist ein Fehler beim senden der Nachricht aufgetreten!"
       }
     },
-    "newsPage": {}
+    "newsPage": {
+      "article": {
+        "project": {
+          "portfolio": {
+            "title": "Portfolio Launch",
+            "description": "Schau dir meine neuesten Projekte und Arbeiten an - das Portfolio ist jetzt online!"
+          }
+        }
+      }
+    }
   },
   "components": {
     "navbar": {
@@ -57,6 +95,46 @@
     "card": {
       "more": "Mehr",
       "read-more": "Weiterlesen"
+    },
+    "badge": {
+      "label": {
+        "published": "Veröffentlicht",
+        "in_development": "In Entwicklung",
+        "production_ready": "Produktionsreif",
+        "web_app_ready": "Web App Bereit",
+        "deployed_vercel": "Bereitgestellt mit Vercel",
+
+        "react_tailwind": "React + Tailwind CSS",
+        "typescript_ready": "TypeScript Ready",
+        "vanilla_js": "Vanilla JS",
+        "electron": "Electron",
+        "nodejs": "Node.js",
+
+        "responsive": "Responsives Design",
+        "dark_mode": "Dark Mode",
+        "multilingual": "Mehrsprachig",
+        "drag_drop": "Drag & Drop",
+        "modular_components": "Modulare Komponenten",
+        "dynamic_grid_layout": "Dynamisches Grid Layout",
+        "editor_mode": "Editor Modus",
+        "canvas_based": "Canvas-Basiert",
+        "image_cropping": "Bild-Zuschnitt",
+        "framer_motion": "Framer Motion + Spring",
+        "open_source": "Open Source",
+        "closed_source": "Closed Source",
+
+        "security_first": "Sicherheit an erster Stelle",
+        "tamper_detection": "Manipulationserkennung",
+        "rbac_mtls": "RBAC + mTLS",
+        "digital_signatures": "Digitale Signaturen",
+
+        "smarthome": "SmartHome",
+        "sandboxed_vm": "Isolierte VM",
+        "sandboxed_webviews": "Sandboxed Webviews",
+        "z_index_control": "Z-Index Kontrolle",
+        "dynamic_routing": "Dynamisches Routing",
+        "ipc_communication": "IPC Kommunikation"
+      }
     }
   },
   "labels": {

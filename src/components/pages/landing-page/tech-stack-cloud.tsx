@@ -108,7 +108,7 @@ export function TechStackCloud() {
       setIndex((prev) => {
         const next = prev < images.length - 1 ? prev + 1 : 0;
         cloudRef.current?.focusIcon(next);
-        console.log("Selecting: ", images[next]);
+        // console.log("Selecting: ", images[next]);
         return next;
       });
     }, 3000);
