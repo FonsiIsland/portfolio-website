@@ -25,7 +25,7 @@ This portfolio was created to demonstrate my web development skills and provide 
 
 ## 🌟 Live Demo
 
-Check out the live website here: [Insert soon]
+Check out the live website here: [https://stefans-portfolio.vercel.app]
 
 ## 💻 Installation
 
