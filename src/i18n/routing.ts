@@ -7,8 +7,8 @@ export const languages = [
 
 export const routing = defineRouting({
   locales: languages.map(([code]) => code),
-  defaultLocale: "en",
-  localeDetection: true,
+  defaultLocale: "de",
+  localeDetection: false,
 });
 
 export type Locale = (typeof routing.locales)[number];
