@@ -4,10 +4,20 @@ import { formSchema } from "@/schemas/schemas";
 import * as z from "zod";
 import { Resend } from "resend";
 import { EmailTemplate } from "@/components/utils/email-template";
+import { checkRateLimit } from "@vercel/firewall";
+import { headers } from "next/headers";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const send = async (rawData: z.infer<typeof formSchema>) => {
+  const headerList = await headers();
+
+  const { rateLimited } = await checkRateLimit("update-object", {
+    headers: headerList,
+  });
+
+  if (rateLimited) return { success: false, error: "Rate limit exceeded" };
+
   console.log("got on server", rawData);
 
   const parsed = formSchema.safeParse(rawData);
