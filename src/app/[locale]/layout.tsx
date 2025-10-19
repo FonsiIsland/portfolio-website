@@ -10,6 +10,7 @@ import { Inter, Jersey_10 } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/sonner";
 import { LightRays } from "@/components/ui/light-rays";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 export const metadata: Metadata = {
   title: "Stefans Portfolio",
@@ -72,6 +73,7 @@ export default async function RootLayout({
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>
+      <GoogleAnalytics gaId="G-13YKP5HR3H" />
     </html>
   );
 }
