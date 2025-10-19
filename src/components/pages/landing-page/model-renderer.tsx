@@ -129,7 +129,6 @@ const Model = forwardRef<Group, ModelProps>(({ url }, ref) => {
       };
 
       const onFinished = (e: AnimationMixerEventMap["finished"]) => {
-        console.log("finito", e.action);
         const action = e.action;
 
         if (action === idleAction.current) {
@@ -202,13 +201,12 @@ export default function ModelRenderer({
   const [canvasVisible, showCanvas] = useState(true);
 
   useEffect(() => {
-    window.addEventListener("beforeunload", alertUser);
+    window.addEventListener("pagehide", pageHide);
     return () => {
-      window.removeEventListener("beforeunload", alertUser);
+      window.removeEventListener("pagehide", pageHide);
     };
   }, []);
-  const alertUser = (e: BeforeUnloadEvent) => {
-    e.returnValue = "";
+  const pageHide = (e: PageTransitionEvent) => {
     showCanvas(false);
   };
 

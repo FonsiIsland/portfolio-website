@@ -43,9 +43,6 @@ const ContactForm = () => {
     },
   });
 
-  console.log("ADD VERCEL FIREWAALL FOR RATE LIMITTING CONTACT APGE");
-  console.log("ADD VERCEL FIREWAALL FOR RATE LIMITTING CONTACT APGE");
-
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     try {
       setLoading(true);
