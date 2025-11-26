@@ -10,7 +10,7 @@ const VotifyArticleEN = () => {
 
       <h2>Making real-time interactive polls easy and fun</h2>
       <p>
-        I'm excited to introduce <strong>Votify</strong>, an open-source
+        I&apos;m excited to introduce <strong>Votify</strong>, an open-source
         platform for live polls and interactive surveys. With Votify, users can
         quickly create polls, share them via QR code or join code, and see
         results in real-time with beautiful visualizations.
@@ -31,7 +31,7 @@ const VotifyArticleEN = () => {
 
       <h3>Features & Highlights</h3>
       <p>
-        Some of Votify's key features include:
+        Some of Votify&apos;s key features include:
         <ul className="list-disc pl-5 mt-2">
           <li>📊 Real-time result visualization</li>
           <li>🔢 Single and multiple-choice questions</li>
@@ -73,8 +73,8 @@ const VotifyArticleEN = () => {
       </p>
 
       <p>
-        Contributions are welcome! 🙌 Whether it's bug fixes, new features, or
-        UI/UX improvements — open an issue or submit a pull request.
+        Contributions are welcome! 🙌 Whether it&apos;s bug fixes, new features,
+        or UI/UX improvements — open an issue or submit a pull request.
       </p>
 
       <div className="flex gap-2 items-center justify-center mt-4 mb-2">

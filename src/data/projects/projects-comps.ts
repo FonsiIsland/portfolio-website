@@ -12,7 +12,6 @@ import ImageCropperArticleDE from "./comps/image-cropper-article/de";
 import ImageCropperArticleEN from "./comps/image-cropper-article/en";
 import ElectronNodejsSmarthomeArticleDE from "./comps/electron-nodejs-smarthome-article/de";
 import ElectronNodejsSmarthomeArticleEN from "./comps/electron-nodejs-smarthome-article/en";
-import VotifyArticle from "./comps/votify-article/de";
 
 export const projectComponents: Record<
   string,
