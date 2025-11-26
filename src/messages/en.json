@@ -34,6 +34,10 @@
       "article": {
         "news": {},
         "project": {
+          "votify": {
+            "title": "Votify",
+            "description": "An open-source live polling web app for creating interactive surveys. Participants can vote without login via QR or join code, and results are displayed live with beautiful visualizations. Perfect for schools, events, workshops, and quick feedback collection."
+          },
           "portfolio": {
             "title": "Portfolio",
             "description": "Check out my latest projects and work - the portfolio is now online!"

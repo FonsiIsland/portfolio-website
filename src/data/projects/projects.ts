@@ -11,6 +11,24 @@ export const ProjectsJson: {
   component: string;
 }[] = [
   {
+    id: "votify",
+    titleKey: "votify.title",
+    descriptionKey: "votify.description",
+    date: "26.11.2025",
+    imageUrl: "/images/projects/votify-preview.png",
+    category: "fullstack",
+    badges: [
+      "published",
+      "openSource",
+      "reactTailwind",
+      "framerMotion",
+      "typeScript",
+      "responsive",
+      "webAppReady",
+    ],
+    component: "VotifyArticle",
+  },
+  {
     id: "portfolio",
     titleKey: "portfolio.title",
     descriptionKey: "portfolio.description",
